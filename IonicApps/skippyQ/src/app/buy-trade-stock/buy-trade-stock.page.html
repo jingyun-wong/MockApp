@@ -1,0 +1,126 @@
+<ion-header class="ion-padding">
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/investment-ideas']">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-row>
+    <ion-col>
+    <ion-title>Buy Order</ion-title>
+      Financial Instrument
+    </ion-col>
+    </ion-row>
+    <br>
+    <ion-progress-bar value="0.25"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-searchbar placeholder="Search name, symbol, ISIN"   (keydown.enter)="getItems($event)"  (ionClear)="onClear($event)"></ion-searchbar>
+  <span *ngFor="let error of errorMessage">
+    <ion-item>{{error}}</ion-item>
+  </span>
+  <ion-card class="welcome-card">
+    <ion-card-content>
+
+            <ion-label>0123456789[Portfolio Name]
+            <br>[Strategy]
+            <br><ion-text color="medium">0123456789 [Custody Account Name]</ion-text>
+            <br><ion-text color="medium">[Client Name]</ion-text>
+            </ion-label>
+            <br>
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+
+    <ion-tab-bar>
+
+
+      <ion-tab-button>
+        <ion-label>Equities</ion-label>
+      </ion-tab-button>
+      <ion-tab-button>
+        <ion-label>Bonds</ion-label>
+      </ion-tab-button>
+      <ion-tab-button>
+        <ion-label>Fixed Income</ion-label>
+      </ion-tab-button>
+      <ion-tab-button>
+        <ion-label>T-Headline</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+
+    <ion-card-content class="ion-text-center">
+
+    <ion-list >
+      <ion-item [routerLink]="['/buy-trade-stock-success']" (click)="routeTradeStock()">
+        <ion-row>
+        <ion-col>
+        <header>
+       <ion-card-title>ABB N</ion-card-title>
+        </header>
+          <br>
+          <ion-card-subtitle>123456789</ion-card-subtitle>
+
+        </ion-col>
+
+        <ion-col>
+
+          <header>
+          <ion-card-title>CHF ' 50000.00</ion-card-title>
+          </header>
+          <br>
+          <ion-card-subtitle>110 units (CHF 45.45) </ion-card-subtitle>
+
+
+
+        </ion-col>
+
+        </ion-row>
+
+
+
+      </ion-item>
+
+
+      <ion-item>
+        <ion-row >
+          <ion-col>
+            <header>
+              <ion-card-title>ABB N</ion-card-title>
+            </header>
+            <br>
+            <ion-text>123456789</ion-text>
+          </ion-col>
+
+          <ion-col>
+            <header>
+              <ion-card-title>CHF ' 50000.00</ion-card-title>
+            </header>
+            <br>
+            <ion-text>110 units (CHF 45.45)</ion-text>
+
+          </ion-col>
+        </ion-row>
+
+
+
+
+      </ion-item>
+    </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+
+
+
+</ion-content>

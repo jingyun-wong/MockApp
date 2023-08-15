@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>no-issue</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header class="ion-padding">
+    <ion-toolbar>
+      <ion-buttons slot="start" [routerLink]="['/investment-ideas']">
+        <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+      </ion-buttons>
+      <ion-row>
+      <ion-col>
+      <ion-title>Portfolio Quality</ion-title>
+      </ion-col>
+      </ion-row>
+      <br>
+      <ion-progress-bar value="0"></ion-progress-bar>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card class="welcome-card">
+      <ion-card-header class="color">
+        <h6>
+          Your porfolio currenctly has no quality issues in 2 out of 7 quality criteria.
+        </h6>
+      </ion-card-header>
+    </ion-card>
+    <ion-text color="dark">
+      As a UBS Advise client, UBS monitors your portfolio against seven quality criteria.
+    </ion-text>
+    
+    <ion-item-divider>
+      <ion-text color="dark">
+        <ion-card-subtitle>No quality issues</ion-card-subtitle>
+      </ion-text>
+    </ion-item-divider>
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>
+  Instruments with negative view
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title>
+  Bonds with a low rating 
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block" color="dark" [routerLink]="['/health-check']">Back to overview</ion-button><br>
+  
+  </ion-content>
+  
+</ion-content>

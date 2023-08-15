@@ -1,0 +1,49 @@
+<ion-header class="ion-padding">
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/buy-trade']">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-row>
+    <ion-col>
+    <ion-title>Buy Order</ion-title>
+     Order Review
+    </ion-col>
+    </ion-row>
+    <br>
+    <ion-progress-bar value="0.60"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" style="justify-content: center">
+  <div class="ion-text-center">
+  <ion-icon size="large" name="checkmark-circle-outline"></ion-icon>
+  <br>
+  <br>
+  <br>
+  <ion-text>Order Submitted</ion-text>
+  <br>
+  <br>
+  <br>
+  <ion-text>Your buy order no.123456789 has been submitted on {{today}}</ion-text>
+
+
+
+
+
+  <ion-button expand="block" (click)="newOrder()" >
+    New Order
+  </ion-button>
+
+  </div>
+
+
+
+
+
+
+
+
+</ion-content>
+
+

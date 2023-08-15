@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/investment-details-oil']" (click)="backInvestment()">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>Trading Idea</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="welcome-card">
+    <ion-item>
+
+    <ion-row>
+    <ion-card-header>
+      <ion-row>
+      <ion-col>
+      <ion-card-subtitle>Equities</ion-card-subtitle>
+      </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+        <ion-card-title>BMW</ion-card-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title color="medium">Bayerische Motoren Werke AG</ion-card-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title color="secondary">ISN: DE0005190003 DE0005190037 </ion-card-title>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    </ion-row>
+    </ion-item>
+    <ion-item>
+
+      <ion-card-content>
+        <ion-row>
+        <ion-col>
+        <ion-card-subtitle>12 Month Price Target</ion-card-subtitle>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+        <ion-col>
+          <ion-card-subtitle>2.91 HKD</ion-card-subtitle>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button color="secondary" size="small">
+              +25.2%
+              <ion-icon name="arrow-up-outline"></ion-icon>
+            </ion-button>
+
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>Upside</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+
+
+
+        <ion-row>
+          <ion-col>
+
+            <ion-card-subtitle><ion-icon name="close-circle-outline" ></ion-icon>As of 8 Feb 2023</ion-card-subtitle>
+
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-item>
+
+    <ion-item >
+      <ion-card-content>
+
+        <ion-row >
+          <ion-col>
+
+            <ion-card-title>Why Invest?</ion-card-title>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <p>
+              Bayerische Motoren Werke AG shares have been advancing last several weeks, and the company continues to focus on speeding up electric vehicle adoption. With a market capitalization of €55 billion, the shares of BMW are not expensive, but investors should keep in mind that the global economy faces a recession risk that could dent corporate earnings and stock markets.
+
+            </p>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-card-content>
+
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+    <ion-row>
+
+      <ion-col>
+        <ion-card-title>Disclaimer</ion-card-title>
+      </ion-col>
+
+    </ion-row>
+    </ion-card-header>
+
+  </ion-card>
+
+  <ion-row>
+  <ion-col>
+  <ion-button expand="block" color="secondary" [routerLink]="['/buy-trade']" (click) ="buyTradeRoute()">Buy</ion-button>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" color="medium" [routerLink]="['/trading-eg']" (click) ="tradingRouteEg()">More Details</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+
+
+
+

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/home']" (click)="routeHome()">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>UBS Manage Updates</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-card>
+  <ion-item>
+
+  </ion-item>
+</ion-card>
+
+<ion-card class="ion-padding">
+  <ion-card-subtitle>Building Blocks</ion-card-subtitle>
+  <ion-button [disabled]="true" color="light" size="small">Beta</ion-button>
+</ion-card>
+
+<ion-content>
+<ion-text class="ion-padding">Updates</ion-text>
+<ion-text class="ion-padding" color="danger">Show All</ion-text>
+<ion-card>
+  <ion-list>
+    <ion-item *ngFor="let editorial of editorials" (click)="routeEditorials()">
+      <ion-col>
+      <ion-card-subtitle>Editorial</ion-card-subtitle>
+      <br>
+      <ion-card-title>{{editorial.name}}</ion-card-title>
+      <br>
+      <ion-card-subtitle>{{editorial.contentType}}</ion-card-subtitle>
+      <br>
+      <ion-card-subtitle>{{editorial.textType}}</ion-card-subtitle>
+
+      </ion-col>
+      <ion-col>
+        <img alt="oil" src={{editorial.image}} >
+      </ion-col>
+
+    </ion-item>
+  </ion-list>
+
+</ion-card>
+</ion-content>
+
+
+
+
+
+

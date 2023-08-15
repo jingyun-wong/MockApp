@@ -1,0 +1,62 @@
+<ion-header class="ion-padding">
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/investment-ideas']">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-row>
+    <ion-col>
+    <ion-title>Buy Order</ion-title>
+      Investment Portfolio Selection
+    </ion-col>
+    </ion-row>
+    <br>
+    <ion-progress-bar value="0"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-card class="welcome-card">
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group name="buyProduct">
+          <ion-item>
+            <ion-label>0123456789[Portfolio Name]
+            <br>[Strategy]
+            <br><ion-text color="medium">0123456789 [Custody Account Name]</ion-text>
+            <br><ion-text color="medium">[Client Name]</ion-text>
+            </ion-label>
+            <br>
+            <ion-radio slot="start" value="0123456789"  [routerLink]="['/buy-trade-stock']" (click) = "portfolioSelectionbtn()"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>0234567891[Portfolio Name]
+              <br>[Strategy]
+              <br><ion-text color="medium">0234567891[Custody Account Name]</ion-text>
+              <br><ion-text color="medium">[Client Name]</ion-text>
+            </ion-label>
+            <br>
+            <ion-radio slot="start" value="0234567891"  [routerLink]="['/buy-trade-stock']" (click) = "portfolioSelectionbtn()" ></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>0345678912[Portfolio Name]
+              <br>[Strategy]
+              <br><ion-text color="medium">0345678912 [Custody Account Name]</ion-text>
+              <br><ion-text color="medium">[Client Name]</ion-text>
+            </ion-label>
+            <br>
+            <ion-radio slot="start" value="0345678912" id="0234567891" [routerLink]="['/buy-trade-stock']" (click) = "portfolioSelectionbtn()"></ion-radio>
+          </ion-item>
+
+        </ion-radio-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+</ion-content>
