@@ -15,7 +15,6 @@ constructor(private http: HttpClient) {
 
 }
 
-
     // get investmentideas
     getInvestmentIdeas() {
         localStorage.setItem("dbLoadTime",JSON.stringify(window.performance.now()))
@@ -35,13 +34,6 @@ constructor(private http: HttpClient) {
         return this.http.post('http://localhost:2345/get/trading',jsonbody)
             
         }
-
-    
-        
-    
-
-
-
 
     // post trackingMetrics
     postTrackingMetrics(jsonbody){

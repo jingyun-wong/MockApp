@@ -9,7 +9,7 @@
 
 
 <ion-content class="ion-padding">
-  <ion-card class="welcome-card">
+  <ion-card class="welcome-card" [routerLink]="['/investment-details-oil']">
     <ion-card-header>
       <ion-card-title>Today's Top 5</ion-card-title>
       <ion-card-subtitle>Articles with trading ideas for you</ion-card-subtitle>
@@ -27,7 +27,7 @@
           </header>
           <ion-col>
             <ion-button>Trading Ideas</ion-button><br>
-            <ion-text color="medium">{{detail.post}}</ion-text>
+            <ion-text color="medium">{{detail.details}}</ion-text>
           </ion-col>
         </content>
       </ion-item>

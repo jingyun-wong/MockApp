@@ -15,9 +15,9 @@ var server = app.listen(2345, function () {
 const config = {
     user: "SqlMainUser", // better stored in an app setting such as process.env.DB_USER
     password: '2023UBS&SMU@fyp', // better stored in an app setting such as process.env.DB_PASSWORD
-    server: 'fyp23r-tst-sqlserver001.database.windows.net', // better stored in an app setting such as process.env.DB_SERVER
+    server: 'ubsmockappsql.database.windows.net', // better stored in an app setting such as process.env.DB_SERVER
     port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
-    database: 'AdatumCRM', // better stored in an app setting such as process.env.DB_NAME
+    database: 'ubsmockappsql', // better stored in an app setting such as process.env.DB_NAME
     authentication: {
         type: 'default'
     },
@@ -177,10 +177,6 @@ app.post('/add/trading', function (req, res) {
 
         // create Request object
         var request = new sql.Request();
-
-
-
-
 
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[trading]
