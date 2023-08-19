@@ -167,6 +167,10 @@ const routes: Routes = [
   {
     path: 'request-proposal',
     loadChildren: () => import('./request-proposal/request-proposal.module').then( m => m.RequestProposalPageModule)
+  },
+  {
+    path: 'confirmation-modal',
+    loadChildren: () => import('./confirmation-modal/confirmation-modal.module').then( m => m.ConfirmationModalPageModule)
   }
 
 
