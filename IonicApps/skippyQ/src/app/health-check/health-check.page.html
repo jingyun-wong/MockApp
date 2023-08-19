@@ -75,9 +75,9 @@
     </ion-col>
     <ion-col>
       <br>
-     <ion-card-title [routerLink]="['/star']">EUR 2151707777</ion-card-title>
+     <ion-card-title>EUR 2151707777</ion-card-title>
        <br>
-       <div>
+       <div [routerLink]="['/star']">
         <ion-icon color="primary" *ngFor="let item of list;let i = index" [name]="condition <= i? 'star-outline' :'star' "
        (click)="review(i)">
         </ion-icon>

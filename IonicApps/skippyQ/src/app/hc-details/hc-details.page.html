@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/selected-issue']">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
     <ion-title>Health Check</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -55,4 +58,5 @@ Expected annual volatility 10.6%
 <ion-text color="primary">
  >Contact client advisor
 </ion-text>
+<ion-button expand="block" color="dark" [routerLink]="['/selected-issue']">Back</ion-button><br>
 </ion-content>
