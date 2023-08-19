@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirm Action</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      {{ message }}
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" color="primary" (click)="dismissModal(true)">Confirm</ion-button>
+  <ion-button expand="block" color="danger" (click)="dismissModal(false)">Cancel</ion-button>
+</ion-content>

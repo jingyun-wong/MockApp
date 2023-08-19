@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -50,7 +51,8 @@ import { HomePage } from './home/home.page';
   providers: [
     SqlService,
     HomePage,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ModalController
 
   ],
   bootstrap: [AppComponent]

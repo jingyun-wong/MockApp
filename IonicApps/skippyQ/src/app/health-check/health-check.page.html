@@ -45,6 +45,12 @@
 .card{
   height: 50%;
 }
+.fulfuill_all_hc{
+  background-color: rgb(143, 237, 143);
+}
+.improvement_in_progress{
+  background-color: rgb(255,241,212);
+}
 
   </style>
   <ion-toolbar>
@@ -58,13 +64,30 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card class="welcome-card">
-    <ion-card-header class="color">
-      <h6>
-       Your portfolio currently fullfills all 7 financial health checks 
-      </h6>
-    </ion-card-header>
-  </ion-card> -->
+    <!-- Check for financial health -->
+    <ion-card *ngIf="showFinancialHealthBanner" class="fulfuill_all_hc">
+      <ion-card-header>
+        <h6>
+          Your portfolio currently fulfills all 7 financial health checks
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </h6>
+      </ion-card-header>
+    </ion-card>
+  
+    <!-- Check for improvement in progress -->
+    <ion-card *ngIf="showImprovementBanner" class="improvement_in_progress">
+      <ion-card-header>
+        <h6>
+          Improvement in progress. <br> You currently have pending trades...<ion-icon name="warning-outline"></ion-icon>
+        </h6>
+      </ion-card-header>
+    </ion-card>
+    <ion-card *ngIf="showTakeNoAction" class="improvement_in_progress">
+      <ion-card-header>
+        {{ currentDate }}: You have confirmed that you have taken note of the quality issue and that you do not want to take action.
+        <ion-icon name="warning-outline"></ion-icon>
+      </ion-card-header>
+    </ion-card>
   <ion-item>
     <ion-col>
      <br>
@@ -163,5 +186,5 @@
       </ion-card>
     <p>As a client with UBS Advice, you can contact your client advisor anytime and involve him/her in the optimization of your portfolio whenever needed       </p>
     <ion-button expand="block" color="dark">Get Proposal</ion-button><br>
-    <ion-button expand="block" color="light">Take no action (all)</ion-button>
+    <ion-button expand="block" color="light" (click)="presentConfirmationModal()">Take no action (all)</ion-button>
 </ion-content>
