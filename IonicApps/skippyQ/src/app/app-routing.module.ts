@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./investment-ideas/investment-ideas.module').then(m => m.InvestmentIdeasPageModule)
   },
   {
-      path: 'investment-details-oil',
+      path: 'investment-details-oil/:id',
       loadChildren: () => import('./investment-details-oil/investment-details-oil.module').then(m => m.InvestmentDetailsOilPageModule)
   },
   {
@@ -136,7 +136,8 @@ const routes: Routes = [
                                                                         {
                                                                                                                                                                                                                         path: 'cancel-order-successful',
                                                                                                                                                                                                                         loadChildren: () => import('./cancel-order-successful/cancel-order-successful.module').then( m => m.CancelOrderSuccessfulPageModule)
-                                                                                                },  {
+                                                                                                },
+  {
     path: 'hc-details',
     loadChildren: () => import('./hc-details/hc-details.module').then( m => m.HcDetailsPageModule)
   },

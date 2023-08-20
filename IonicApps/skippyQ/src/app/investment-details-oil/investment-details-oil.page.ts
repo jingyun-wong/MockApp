@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
 import { TrackingService } from './../shared/services/tracking.service';
 
-
 @Component({
   selector: 'app-list',
   templateUrl: 'investment-details-oil.page.html',
@@ -10,6 +9,7 @@ import { TrackingService } from './../shared/services/tracking.service';
 })
 export class InvestmentDetailsOilPage implements OnInit {
 
+  investmentIdeaIndex: string;
   allCampaigns: Campaign[];
   campaigns: Campaign[];
   campaignEmail:string;
@@ -20,7 +20,6 @@ export class InvestmentDetailsOilPage implements OnInit {
   contentInitTime! : number;
   viewInitTime! : number;
 
-
   constructor() {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
@@ -29,9 +28,10 @@ export class InvestmentDetailsOilPage implements OnInit {
   ngOnInit() {
     this.initTime = window.performance.now()
     localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
-
-
+    this.investmentIdeaIndex = window.location.href.split("/")[4];
   }
+
+
   financeNewRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))

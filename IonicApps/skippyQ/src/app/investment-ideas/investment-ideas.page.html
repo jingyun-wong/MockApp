@@ -9,7 +9,7 @@
 
 
 <ion-content class="ion-padding">
-  <ion-card class="welcome-card" [routerLink]="['/investment-details-oil']">
+  <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-title>Today's Top 5</ion-card-title>
       <ion-card-subtitle>Articles with trading ideas for you</ion-card-subtitle>
@@ -17,7 +17,8 @@
     </ion-card-header>
     <ion-card-content>
 
-      <ion-item  *ngFor="let detail of investment; let i = index" [routerLink]="['/investment-details-oil']" (click)="investmentDetails()">
+      <ion-item  style="margin-bottom: 15px;" *ngFor="let detail of investment; let i = index" [routerLink]="['/investment-details-oil', i+1]" (click)="investmentDetails()">
+        <hr>
         <content>
           <header>
             <img alt="US Stock" src={{detail.img}}/>
