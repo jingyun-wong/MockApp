@@ -26,7 +26,7 @@
     </ion-card-content>
   </ion-card>
   <br>
-  <ion-card class="welcome-card" (click)="presentAlert()">
+  <ion-card class="welcome-card" (click)="presentAlert()" [routerLink]="['/ubs-manage/manage']">
     <ion-card-header>
       <ion-card-subtitle>My Manage</ion-card-subtitle>
       <ion-card-title>CHF 1'633'589</ion-card-title>
@@ -51,6 +51,15 @@
     </ion-card-header>
     <ion-card-content>
       <p>Portfolio</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card" [routerLink]="['/ubs-manage/way']">
+    <ion-card-header>
+      <ion-card-subtitle>My Way Portfolio</ion-card-subtitle>
+      <ion-card-title>CHF 3'113'051</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>UBS Manage [My Way] Growth</p>
     </ion-card-content>
   </ion-card>
 
