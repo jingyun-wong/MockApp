@@ -35,6 +35,7 @@ contentInitTime! : number
 viewInitTime! : number
 dbStartTime! : number
 clicks = parseInt(localStorage.getItem("pageClicks"))
+type: string;
 
 
 
@@ -42,8 +43,7 @@ clicks = parseInt(localStorage.getItem("pageClicks"))
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
     console.log(this.startTime/1000)
-
-
+    this.type = window.location.href.split('/')[4];
   }
 
   ngOnInit() {

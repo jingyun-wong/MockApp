@@ -77,7 +77,7 @@ const routes: Routes = [
     loadChildren: () => import('./assets/campaign-donors.module').then( m => m.CampaignDonorsPageModule)
   },
     {
-      path: 'ubs-manage',
+      path: 'ubs-manage/:name',
       loadChildren: () => import('./ubs-manage/ubs-manage.module').then( m => m.UbsManagePageModule)
     },
         {

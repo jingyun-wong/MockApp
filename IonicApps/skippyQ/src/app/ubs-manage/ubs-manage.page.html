@@ -9,7 +9,7 @@
 
 <ion-card>
   <ion-item>
-
+    <ion-card-title>{{type=='manage'?'047D2371E':'My Way Portfolio'}}</ion-card-title>
   </ion-item>
 </ion-card>
 
@@ -19,9 +19,9 @@
 </ion-card>
 
 <ion-content>
-<ion-text class="ion-padding">Updates</ion-text>
-<ion-text class="ion-padding" color="danger">Show All</ion-text>
-<ion-card>
+<ion-text class="ion-padding">Comments from portfolio manager</ion-text>
+<ion-text *ngIf="type == 'manage'" class="ion-padding" color="danger">Show All</ion-text>
+<ion-card *ngIf="type == 'manage'">
   <ion-list>
     <ion-item *ngFor="let editorial of editorials" (click)="routeEditorials()">
       <ion-col>
@@ -40,8 +40,74 @@
 
     </ion-item>
   </ion-list>
-
 </ion-card>
+<ion-card *ngIf="type == 'way'">
+  <div style="margin:20px">
+    <h6>Today</h6>
+
+    <ul style="font-size: medium;line-height: 25px;">
+      <li>Your portfolio delivered a positive monthly performance, mainly driven by equities</li>
+      <li>The portfolio is overweight ESG leaders equities, improving ESG queities and ESG engagement high yield bonds and underweight development bonds</li>
+      <li>The UBS Future of Eath fund was added to the portfolio. It invests in the future of our planet along key focus areas: people, health and communities, engergy, land and water</li>
+    </ul>
+  </div>
+</ion-card>
+
+<ion-text *ngIf="type == 'way'" class="ion-padding">Updates</ion-text>
+<ion-card *ngIf="type == 'way'">
+  <ion-list>
+    <ion-item>
+      <ion-col>
+      <ion-card-subtitle>Performance Report</ion-card-subtitle>
+      <br>
+      <ion-card-title>Your monthly updates</ion-card-title>
+      <br>
+      <ion-card-subtitle>Understand the previous month's performance of your UBS Manage portfolio</ion-card-subtitle>
+      <br>
+      <ion-card-subtitle>Today</ion-card-subtitle>
+
+      </ion-col>
+      <ion-col>
+        <img alt="oil" src="https://images.unsplash.com/photo-1429041966141-44d228a42775?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" >
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-card-subtitle>Journal</ion-card-subtitle>
+        <br>
+        <ion-card-title>Sustainable Investing Journal</ion-card-title>
+        <br>
+        <ion-card-subtitle>Learn how your money is making a positive impact in the world</ion-card-subtitle>
+        <br>
+        <ion-card-subtitle>Last Week</ion-card-subtitle>
+      </ion-col>
+      <ion-col>
+        <img alt="oil" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2026&q=80" >
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-card-subtitle>Video</ion-card-subtitle>
+        <br>
+        <ion-card-title>UBS Manage in Focus</ion-card-title>
+        <br>
+        <ion-card-subtitle>The global vaccine rollout and strong company earnings were positive for equities and ...</ion-card-subtitle>
+        <br>
+        <ion-card-subtitle>Last Week</ion-card-subtitle>
+      </ion-col>
+      <ion-col>
+        <img alt="oil" src="https://images.unsplash.com/photo-1421091242698-34f6ad7fc088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" >
+      </ion-col>
+    </ion-item>
+  </ion-list>
+</ion-card>
+<div *ngIf="type == 'way'" style="margin:15px">
+  <b style="color:rgb(75, 74, 74)">Investment approach</b>
+  <p style="color:gray">
+    In a nutshell, sustainable investing(SI) is an investent philosophy with the intention to perform comparably to traditional ivestments, while at the same time having a positive impact on the environemnt and society.
+  </p>
+  <ion-button style="width:95%" color="light">View report</ion-button>
+</div>
 </ion-content>
 
 
