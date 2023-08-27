@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
-
+import { ConfirmationModalPage } from '../confirmation-modal/confirmation-modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -39,7 +40,7 @@ type: string;
 
 
 
-  constructor() {
+  constructor(private modalController: ModalController) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
     console.log(this.startTime/1000)
@@ -53,6 +54,16 @@ type: string;
 
   }
 
+  async openPDF(){
+    const modal = await this.modalController.create({
+      component: ConfirmationModalPage,
+      componentProps: {
+        message: "Report Downloaded"
+      }
+    })
+    return await modal.present();
+  }
+
   routeEditorials(){
     this.clicks +=1
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
@@ -62,4 +73,5 @@ type: string;
     this.clicks +=1
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
   }
+
 }
