@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { HcFulfilledPage } from './hc-fulfilled.page';
+import { ImproveQualitySuccessPage } from './improve-quality-success.page';
 
-describe('HcFulfilledPage', () => {
-  let component: HcFulfilledPage;
-  let fixture: ComponentFixture<HcFulfilledPage>;
+describe('ImproveQualitySuccessPage', () => {
+  let component: ImproveQualitySuccessPage;
+  let fixture: ComponentFixture<ImproveQualitySuccessPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HcFulfilledPage ],
+      declarations: [ ImproveQualitySuccessPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HcFulfilledPage);
+    fixture = TestBed.createComponent(ImproveQualitySuccessPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

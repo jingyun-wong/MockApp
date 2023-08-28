@@ -1,5 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hc-details',
@@ -7,7 +9,7 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./hc-details.page.scss'],
 })
 export class HcDetailsPage implements OnInit {
-
+  issue: string;
   @ViewChild('lineCanvas',{static: false}) private lineCanvas: ElementRef;
   
     bars: any;
@@ -17,17 +19,19 @@ export class HcDetailsPage implements OnInit {
     doughnutChart: any;
     lineChart: any;
   
-  //   constructor(private adminServ: AdminService) { }
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
   
     ngOnInit() {
-  
+      this.issue = this.activatedRoute.snapshot.paramMap.get('issue');
     }
   
     ngAfterViewInit() {
       this.lineChartMethod();
     }
   
-   
+    goToSelectedIssuePage() {
+      this.router.navigate(['/selected-issue', this.issue]);
+    }
   
     lineChartMethod() {
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
