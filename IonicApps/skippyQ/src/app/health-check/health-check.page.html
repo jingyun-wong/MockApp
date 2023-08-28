@@ -54,8 +54,8 @@
 
   </style>
   <ion-toolbar>
-    <ion-buttons slot="start" >
-      <ion-menu-button autoHide='false'></ion-menu-button>
+    <ion-buttons slot="start" [routerLink]="['/my-advice']">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title>
       Portfolio Quality 
@@ -125,19 +125,25 @@
         <ion-label>    Risk Analysis
         </ion-label>
         <br>
-        <ion-radio slot="start" value="0123456789" [routerLink]="['/selected-issue']"></ion-radio>
+        <ion-radio slot="start" value="0123456789"></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>  Analysis by asset class    
         </ion-label>
         <br>
-        <ion-radio slot="start" value="0234567891"  ng-click="count = count + 1" ng-init="count=0"[routerLink]="['/selected-issue']"></ion-radio>
+        <ion-radio slot="start" value="0234567891"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>bulk risks: Georg Fischer N
+        <ion-label>Bulk risks: Georg Fischer N
         </ion-label>
         <br>
-        <ion-radio slot="start" value="0345678912" id="0234567891" ng-click="count = count + 1" ng-init="count=0" [routerLink]="['/selected-issue']"></ion-radio>
+        <ion-radio slot="start" value="0345678912" id="0234567891" ng-click="count = count + 1" ng-init="count=0" [routerLink]="['/selected-issue', 'Georg Fischer N']"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bulk risks: Peugeot SA
+        </ion-label>
+        <br>
+        <ion-radio slot="start" value="0345678913" id="0234567892" ng-click="count = count + 1" ng-init="count=0" [routerLink]="['/selected-issue', 'Peugeot SA']"></ion-radio>
       </ion-item>
       <ion-item-divider> 
       </ion-item-divider>
@@ -145,7 +151,7 @@
         <ion-label> Not moniored Instruments: 2 Temenos 22
         </ion-label>
         <br>
-        <ion-radio slot="start" value="0345678912" id="0234567891" ng-click="count = count + 1" ng-init="count=0"></ion-radio>
+        <ion-radio slot="start" value="0345678914" id="0234567893"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>  

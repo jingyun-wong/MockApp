@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HcFulfilledPageRoutingModule } from './hc-fulfilled-routing.module';
+import { ImproveQualityPageRoutingModule } from './improve-quality-routing.module';
 
-import { HcFulfilledPage } from './hc-fulfilled.page';
+import { ImproveQualityPage } from './improve-quality.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HcFulfilledPageRoutingModule
+    ImproveQualityPageRoutingModule
   ],
-  declarations: [HcFulfilledPage]
+  declarations: [ImproveQualityPage]
 })
-export class HcFulfilledPageModule {}
+export class ImproveQualityPageModule {}

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { InProgressMsgPage } from './in-progress-msg.page';
+import { ImproveQualityReviewPage } from './improve-quality-review.page';
 
-describe('InProgressMsgPage', () => {
-  let component: InProgressMsgPage;
-  let fixture: ComponentFixture<InProgressMsgPage>;
+describe('ImproveQualityReviewPage', () => {
+  let component: ImproveQualityReviewPage;
+  let fixture: ComponentFixture<ImproveQualityReviewPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InProgressMsgPage ],
+      declarations: [ ImproveQualityReviewPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InProgressMsgPage);
+    fixture = TestBed.createComponent(ImproveQualityReviewPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

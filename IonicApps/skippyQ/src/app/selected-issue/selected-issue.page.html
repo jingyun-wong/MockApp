@@ -9,8 +9,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-text color="dark">
-   The is currently no investment proposal available for you 
+  <ion-text color="dark" *ngIf="issue === 'Georg Fischer N'">
+    There is currently no investment proposal available for you
+   </ion-text>
+  <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
+   You have more than 10% of your portfolio invested in Peugeot SA.
   </ion-text>
   
   <ion-item-divider>
@@ -20,16 +23,19 @@
   </ion-item-divider>
   <ion-card class="welcome-card">
     <ion-card-header>
-      <ion-card-title [routerLink]="['/hc-details']">
-Bulk risks:Georg Fischer N
+      <ion-card-title (click)="goToHCDetailsPage()">
+Bulk risks: {{ issue }}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
     </ion-card-content>
   </ion-card>
 
-  <ion-text color="dark">
+  <ion-text color="dark" *ngIf="issue === 'Georg Fischer N'">
     Please request a personalized investment proposal from client advisor 
+   </ion-text>
+   <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
+    In case you have questions according this issue, please contact your client advisor. 
    </ion-text>
    <br>
    <br>
@@ -43,6 +49,7 @@ Bulk risks:Georg Fischer N
    <br>
    <br>
    <br>
-  <ion-button expand="block" color="dark" [routerLink]="['/request-proposal']">Request proposal</ion-button><br>
+  <ion-button expand="block" color="dark" *ngIf="issue === 'Georg Fischer N'" [routerLink]="['/request-proposal']">Request proposal</ion-button><br>
+  <ion-button expand="block" color="dark" *ngIf="issue === 'Peugeot SA'" [routerLink]="['/improve-quality']">Improve Quality</ion-button><br>
   <ion-button expand="block" color="light">Contact client advisor</ion-button>
 </ion-content>

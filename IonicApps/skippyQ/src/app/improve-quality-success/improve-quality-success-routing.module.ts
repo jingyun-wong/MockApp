@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { InProgressMsgPage } from './in-progress-msg.page';
+import { ImproveQualitySuccessPage } from './improve-quality-success.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: InProgressMsgPage
+    component: ImproveQualitySuccessPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InProgressMsgPageRoutingModule {}
+export class ImproveQualitySuccessPageRoutingModule {}
