@@ -16,7 +16,7 @@
     </ion-card-header>
     
     <ion-card-content>
-      <ion-item  style="margin-bottom: 15px;" *ngFor="let detail of investment; let i = index" [routerLink]="['/investment-details-oil', i+1]" (click)="investmentDetails()">
+      <ion-item  style="margin-bottom: 15px;" *ngFor="let detail of investment" [routerLink]="['/investment-details-oil']" [queryParams]="{id: detail.id}" (click)="investmentDetails()">
         <hr>
         <content>
           <header>
@@ -41,7 +41,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item  style="margin-bottom: 15px;" *ngFor="let detail of investment; let i = index" [routerLink]="['/investment-details-oil', i+1]" (click)="investmentDetails()">
+      <ion-item  style="margin-bottom: 15px;" *ngFor="let detail of mostRead" [routerLink]="['/investment-details-oil']" [queryParams]="{id: detail.id}" (click)="investmentDetails()">
         <hr>
         <content>
           <header>

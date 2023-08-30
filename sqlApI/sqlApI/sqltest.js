@@ -46,7 +46,7 @@ app.get('/get/trackingMetrics', function (req, res) {
 
         // create Request object
         var request = new sql.Request();
-           
+    
         // query to the database and get the records
         request.query('select * from [dbo].[trackingMetrics]', function (err, recordset) {
             
@@ -242,6 +242,78 @@ app.get('/get/investmentIdeas', function (req, res) {
         });
     });
 });
+
+app.get('/get/investmentIdeas/:id', function(req, res) {
+    const id = req.params.id;
+    var sql = require("mssql");
+
+    sql.connect(config, function(err) {
+        if (err) console.log(err);
+
+        var request = new sql.Request();
+
+        request.query(`select * from [dbo].[investmentIdeas] where [id] = '${id}'`, function (err, recordset) {
+            
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully retrieved  data",
+                'Data': recordset
+            });
+            
+        });
+    })
+})
+
+app.get('/get/tradingIdeas/all/:category', function(req,res) {
+    const category = req.params.category;
+    var sql = require("mssql");
+
+    sql.connect(config, function(err) {
+        if (err) console.log(err);
+
+        var request = new sql.Request();
+
+        request.query(`select * from [dbo].[tradingIdeas] where [category] = '${category}' and [id] is null`, function (err, recordset) {
+            
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully retrieved  data",
+                'Data': recordset
+            });
+            
+        });
+    })
+})
+
+app.get('/get/tradingIdeas/main/:id', function(req,res) {
+    const id = req.params.id;
+    var sql = require("mssql");
+
+    sql.connect(config, function(err) {
+        if (err) console.log(err);
+
+        var request = new sql.Request();
+
+        request.query(`select * from [dbo].[tradingIdeas] where [id] = '${id}'`, function (err, recordset) {
+            
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully retrieved  data",
+                'Data': recordset
+            });
+            
+        });
+    })
+})
 
 
 app.post('/add/investmentIdeas', function (req, res) {

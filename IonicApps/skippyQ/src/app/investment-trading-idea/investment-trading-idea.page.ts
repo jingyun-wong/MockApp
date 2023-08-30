@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
-
+import { ActivatedRoute } from '@angular/router';
+import { tradingIdea } from '../shared/models/trading-idea';
 
 @Component({
   selector: 'app-list',
@@ -12,6 +13,8 @@ export class InvestmentTradingIdeaPage implements OnInit {
   allCampaigns: Campaign[];
   campaigns: Campaign[];
   campaignEmail:string;
+  tradingIdeaName: string;
+  tradingIdeaType: string;
 
   startTime! : number
   initTime! : number
@@ -23,14 +26,20 @@ export class InvestmentTradingIdeaPage implements OnInit {
   clicks = parseInt(localStorage.getItem('pageClicks'))
 
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.tradingIdeaName = params["name"];
+      this.tradingIdeaType = params["type"];
+    });  
   }
+  
 
   ngOnInit() {
-  this.initTime = window.performance.now()
-  localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
+    this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
+
 
   }
 
