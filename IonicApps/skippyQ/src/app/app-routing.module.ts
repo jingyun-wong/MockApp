@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./investment-ideas/investment-ideas.module').then(m => m.InvestmentIdeasPageModule)
   },
   {
-    path: 'investment-details-oil/:id',
+    path: 'investment-details-oil',
     loadChildren: () => import('./investment-details-oil/investment-details-oil.module').then(m => m.InvestmentDetailsOilPageModule)
   },
   {
@@ -178,7 +178,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})
   ],
   exports: [RouterModule]
 })

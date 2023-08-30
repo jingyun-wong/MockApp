@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -9,18 +10,22 @@ import Chart from 'chart.js/auto';
 export class TradingEgPage implements AfterViewInit {
 
   @ViewChild('lineCanvas',{static: false}) private lineCanvas: ElementRef;
-  
+
     bars: any;
     colorArray: any;
     label = [];
     data = [];
     doughnutChart: any;
     lineChart: any;
+    name: string;
   
-  //   constructor(private adminServ: AdminService) { }
+    constructor(private activatedRoute: ActivatedRoute) { }
   
     ngOnInit() {
-  
+      this.activatedRoute.queryParams.subscribe(params => {
+        console.log(params)
+        this.name = params["name"];
+      });  
     }
   
     ngAfterViewInit() {

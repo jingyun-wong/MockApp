@@ -12,11 +12,10 @@ import {SqlService} from '../shared/services/sqldb.service'
 })
 export class InvestmentIdeasPage implements OnInit {
 
-
-
   clicks = 0
-  investment:investment[]=[];
-  
+  allInvestment:{[key:string]:any[]}={};
+  investment:investment[] = []
+  mostRead: investment[] = []
 
   startTime! : number
   initTime! : number
@@ -26,41 +25,36 @@ export class InvestmentIdeasPage implements OnInit {
   dbloadTime!: number
   backEndErrors =0;
 
-
-
-  
-
-
-
-
-
-  constructor(private router: Router, private SqlService :SqlService) {
+  constructor(private SqlService :SqlService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-
   }
-
 
   ngOnInit() {
 
   this.initTime = window.performance.now()
-
-  
-
   this.SqlService.getInvestmentIdeas().subscribe(result => {
-
-   
     var jsonbody = result['Data']['recordset']
-    
     for (var i = 0; i < jsonbody.length; i++){
+      console.log(jsonbody[i])
+      var newInvestment = new investment(jsonbody[i]['id'],jsonbody[i]['category'],jsonbody[i]['img'],jsonbody[i]['post'],jsonbody[i]['title'],jsonbody[i]['details'])
+      if (newInvestment.category in this.allInvestment){
+        this.allInvestment[newInvestment.category].push(newInvestment)
+      }
+      else{
+        this.allInvestment[newInvestment.category] = [newInvestment]
+      }
+    }
 
-    console.log(jsonbody[i])
+    for ( let topic in this.allInvestment ){
+      var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
+      this.investment.push(this.allInvestment[topic][random])
+    }
 
-    var newInvestment = new investment(jsonbody[i]['category'],jsonbody[i]['img'],jsonbody[i]['post'],jsonbody[i]['title'],jsonbody[i]['details'])
-    this.investment.push(newInvestment)
-    
-
-  }
+    for ( let topic in this.allInvestment ){
+      var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
+      this.mostRead.push(this.allInvestment[topic][random])
+    }
 
   }, error => {
     this.backEndErrors += 1
@@ -68,24 +62,15 @@ export class InvestmentIdeasPage implements OnInit {
     console.log(error)
     
   })
-  
 
   localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
   localStorage.setItem("dbLoadTime",JSON.stringify(window.performance.now()-parseFloat(localStorage.getItem("dbLoadTime"))))
   
-
-
- 
-
   }
 
   investmentDetails(){
-
       this.clicks += 1
       localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-
- 
-
   }
 
 

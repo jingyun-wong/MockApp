@@ -14,19 +14,19 @@
     <ion-card-header>
       <ion-row>
       <ion-col>
-      <ion-card-subtitle>Equities</ion-card-subtitle>
+      <ion-card-subtitle>{{tradingIdeaType}}</ion-card-subtitle>
       </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-        <ion-card-title>BMW</ion-card-title>
+        <ion-card-title>{{tradingIdeaName}}</ion-card-title>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>
           <ion-card-title color="medium">Bayerische Motoren Werke AG</ion-card-title>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <ion-row>
         <ion-col>
           <ion-card-title color="secondary">ISN: DE0005190003 DE0005190037 </ion-card-title>
@@ -89,7 +89,7 @@
         <ion-row>
           <ion-col>
             <p>
-              Bayerische Motoren Werke AG shares have been advancing last several weeks, and the company continues to focus on speeding up electric vehicle adoption. With a market capitalization of €55 billion, the shares of BMW are not expensive, but investors should keep in mind that the global economy faces a recession risk that could dent corporate earnings and stock markets.
+              {{tradingIdeaName}} shares have been advancing last several weeks, and the company continues to focus on speeding up electric vehicle adoption. With a market capitalization of €55 billion, the shares of {{tradingIdeaName}} are not expensive, but investors should keep in mind that the global economy faces a recession risk that could dent corporate earnings and stock markets.
 
             </p>
           </ion-col>
@@ -122,7 +122,7 @@
 
   <ion-row>
     <ion-col>
-      <ion-button expand="block" color="medium" [routerLink]="['/trading-eg']" (click) ="tradingRouteEg()">More Details</ion-button>
+      <ion-button expand="block" color="medium" [routerLink]="['/trading-eg']" [queryParams]="{name:tradingIdeaName}" (clicl)="tradingRouteEg()">More Details</ion-button>
     </ion-col>
   </ion-row>
 

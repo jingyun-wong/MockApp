@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
 import { TrackingService } from './../shared/services/tracking.service';
-
+import { SqlService } from '../shared/services/sqldb.service';
+import { investment } from '../shared/models/investment';
+import { tradingIdea } from '../shared/models/trading-idea';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: 'investment-details-oil.page.html',
@@ -10,6 +13,9 @@ import { TrackingService } from './../shared/services/tracking.service';
 export class InvestmentDetailsOilPage implements OnInit {
 
   investmentIdeaIndex: string;
+  investmentIdea: investment;
+  tradingIdea: tradingIdea;
+  tradingIdeaList: tradingIdea[] = [];
   allCampaigns: Campaign[];
   campaigns: Campaign[];
   campaignEmail:string;
@@ -19,8 +25,9 @@ export class InvestmentDetailsOilPage implements OnInit {
   initTime! : number;
   contentInitTime! : number;
   viewInitTime! : number;
+  backEndErrors = 0;
 
-  constructor() {
+  constructor(private SqlService: SqlService, public activatedRoute: ActivatedRoute) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
   }
@@ -28,7 +35,50 @@ export class InvestmentDetailsOilPage implements OnInit {
   ngOnInit() {
     this.initTime = window.performance.now()
     localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
-    this.investmentIdeaIndex = window.location.href.split("/")[4];
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.investmentIdeaIndex = params["id"];
+
+      this.SqlService.getInvestmentIdeasById(this.investmentIdeaIndex).subscribe(result => {
+        var jsonbody = result['Data']['recordset']
+        this.investmentIdea = jsonbody[0]
+    
+        this.SqlService.getTradingIdeas(this.investmentIdea.category).subscribe(result => {
+          var jsonbody = result['Data']['recordset']
+          var chosenList = []
+          this.tradingIdeaList = []
+
+          while (this.tradingIdeaList.length < 3){
+            var idx = Math.floor(Math.random() * jsonbody.length);
+
+            if (!chosenList.includes(idx)){
+              console.log(idx, chosenList, this.tradingIdeaList)
+              this.tradingIdeaList.push(jsonbody[idx])
+              chosenList.push(idx)
+            }
+          }
+      
+        }, error => {
+          this.backEndErrors += 1
+          localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
+          console.log(error)
+        })
+  
+      }, error => {
+        this.backEndErrors += 1
+        localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
+        console.log(error)
+      })
+  
+      this.SqlService.getTradingIdeaById(this.investmentIdeaIndex).subscribe(result => {
+        var jsonbody = result['Data']['recordset']
+        this.tradingIdea = jsonbody[0]  
+      }, error => {
+        this.backEndErrors += 1
+        localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
+        console.log(error)
+      })
+    }); 
   }
 
 

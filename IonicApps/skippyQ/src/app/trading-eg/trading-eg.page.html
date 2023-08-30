@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/investment-trading-idea']" [queryParams]="{name: name}">
+      <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -8,7 +11,7 @@
 </ion-header>
 <ion-card class="welcome-card">
   <ion-card-header>
-    <ion-card-title>ABB In</ion-card-title>
+    <ion-card-title>{{name}}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <p>Hign:27.13</p>
