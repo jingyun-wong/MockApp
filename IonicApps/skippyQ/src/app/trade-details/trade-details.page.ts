@@ -125,7 +125,7 @@ export class TradeDetailsPage implements OnInit{
 
   ngOnInit() {
 
-  this.selectedDetail = "Order Data"
+  this.selectedDetail = "Order"
   this.initTime = window.performance.now()
   localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
 
