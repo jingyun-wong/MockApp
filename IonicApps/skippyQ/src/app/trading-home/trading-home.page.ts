@@ -86,8 +86,10 @@ dbStartTime! : number
     jsonbody[i]['orderStatus'],jsonbody[i]['orderType'],jsonbody[i]['portfolioId'],jsonbody[i]['portfolioType'],jsonbody[i]['priceLimit'],
     jsonbody[i]['quantity'],jsonbody[i]['settlementCurrency'],jsonbody[i]['tradingPlace'],jsonbody[i]['triggerLimit'],
     jsonbody[i]['units'],jsonbody[i]['validity'],jsonbody[i]['enteredOn'],jsonbody[i]['executedStocks'])
-    this.selectedArray.push(newTrade)
+    // this.selectedArray.push(newTrade)
     this.details.push(newTrade)
+    this.pending()
+    this.orderStatus = "pending"
     
 
   }
