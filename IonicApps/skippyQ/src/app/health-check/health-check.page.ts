@@ -13,9 +13,16 @@ export class HealthCheckPage implements OnInit {
   showTakeNoAction: boolean = false;
   currentDate: string;
 
-  constructor(private modalController: ModalController) {this.currentDate = new Date().toLocaleDateString();}
+  clicks = parseInt(localStorage.getItem("pageClicks"));
+  startTime!: number;
+  initTime!: number;
+  contentInitTime!: number;
+  viewInitTime!: number;
+
+  constructor(private modalController: ModalController) { this.currentDate = new Date().toLocaleDateString(); }
 
   async presentConfirmationModal() {
+    this.clickAnything();
     const modal = await this.modalController.create({
       component: ConfirmationModalPage,
       componentProps: {
@@ -23,6 +30,7 @@ export class HealthCheckPage implements OnInit {
       }
     });
     modal.onDidDismiss().then((dataReturned) => {
+      this.clickAnything();
       if (dataReturned && dataReturned.data && dataReturned.data.confirmed) {
         // User confirmed, show the new banner
         this.showTakeNoAction = true;
@@ -30,16 +38,24 @@ export class HealthCheckPage implements OnInit {
     });
     return await modal.present();
   }
-  
+
   ngOnInit() {
+    this.startTime = window.performance.now()
+    localStorage.setItem("startTime", JSON.stringify(this.startTime))
+    this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
   }
 
   condition: number = 0;
   list: any[] = new Array(5);
-  
+
   review(i) {
-     this.condition = i + 1;
-     // your code........
+    this.condition = i + 1;
+    // your code........
+  }
+  clickAnything() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
   }
 
 }
