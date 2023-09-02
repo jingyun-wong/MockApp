@@ -1,115 +1,124 @@
 <ion-header>
   <style>
-/* Three columns side by side */
-.column {
-  float: left;
-  width: 33.3%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
+    /* Three columns side by side */
+    .column {
+      float: left;
+      width: 33.3%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
 
-/* Display the columns below each other instead of side by side on small screens */
-@media screen and (max-width: 650px) {
-  .column {
-    width: 100%;
-    display: block;
-  }
-}
+    /* Display the columns below each other instead of side by side on small screens */
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
 
-/* Add some shadows to create a card effect */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+    /* Add some shadows to create a card effect */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-/* Some left and right padding inside the container */
-.container {
-  padding: 0 16px;
-}
+    /* Some left and right padding inside the container */
+    .container {
+      padding: 0 16px;
+    }
 
-/* Clear floats */
-.container::after, .row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    /* Clear floats */
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
 
-.title {
-  color: grey;
-}
+    .title {
+      color: grey;
+    }
 
-.orgImg {
-    max-width: 500px;
-    max-height: 500px;
-}
+    .orgImg {
+      max-width: 500px;
+      max-height: 500px;
+    }
 
-.card{
-  height: 50%;
-}
-.fulfuill_all_hc{
-  background-color: rgb(143, 237, 143);
-}
-.improvement_in_progress{
-  background-color: rgb(255,241,212);
-}
-
+    .card {
+      height: 50%;
+    }
+    .fulfuill_all_hc {
+      background-color: rgb(143, 237, 143);
+    }
+    .improvement_in_progress {
+      background-color: rgb(255, 241, 212);
+    }
   </style>
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/my-advice']">
+    <ion-buttons
+      slot="start"
+      (click)="clickAnything()"
+      [routerLink]="['/my-advice']"
+    >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title>
-      Portfolio Quality 
-    </ion-title>
+    <ion-title> Portfolio Quality </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <!-- Check for financial health -->
-    <ion-card *ngIf="showFinancialHealthBanner" class="fulfuill_all_hc">
-      <ion-card-header>
-        <h6>
-          Your portfolio currently fulfills all 7 financial health checks
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-        </h6>
-      </ion-card-header>
-    </ion-card>
-  
-    <!-- Check for improvement in progress -->
-    <ion-card *ngIf="showImprovementBanner" class="improvement_in_progress">
-      <ion-card-header>
-        <h6>
-          Improvement in progress. <br> You currently have pending trades...<ion-icon name="warning-outline"></ion-icon>
-        </h6>
-      </ion-card-header>
-    </ion-card>
-    <ion-card *ngIf="showTakeNoAction" class="improvement_in_progress">
-      <ion-card-header>
-        {{ currentDate }}: You have confirmed that you have taken note of the quality issue and that you do not want to take action.
-        <ion-icon name="warning-outline"></ion-icon>
-      </ion-card-header>
-    </ion-card>
+  <!-- Check for financial health -->
+  <ion-card *ngIf="showFinancialHealthBanner" class="fulfuill_all_hc">
+    <ion-card-header>
+      <h6>
+        Your portfolio currently fulfills all 7 financial health checks
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </h6>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- Check for improvement in progress -->
+  <ion-card *ngIf="showImprovementBanner" class="improvement_in_progress">
+    <ion-card-header>
+      <h6>
+        Improvement in progress. <br />
+        You currently have pending trades...<ion-icon
+          name="warning-outline"
+        ></ion-icon>
+      </h6>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngIf="showTakeNoAction" class="improvement_in_progress">
+    <ion-card-header>
+      {{ currentDate }}: You have confirmed that you have taken note of the
+      quality issue and that you do not want to take action.
+      <ion-icon name="warning-outline"></ion-icon>
+    </ion-card-header>
+  </ion-card>
   <ion-item>
     <ion-col>
-     <br>
-    <ion-card-title>0001</ion-card-title>
-      <br>
-    <ion-card-subtitle>Portfolio Quality</ion-card-subtitle>
-
+      <br />
+      <ion-card-title>0001</ion-card-title>
+      <br />
+      <ion-card-subtitle>Portfolio Quality</ion-card-subtitle>
     </ion-col>
     <ion-col>
-      <br>
-     <ion-card-title>EUR 2151707777</ion-card-title>
-       <br>
-       <div [routerLink]="['/star']">
-        <ion-icon color="primary" *ngFor="let item of list;let i = index" [name]="condition <= i? 'star-outline' :'star' "
-       (click)="review(i)">
+      <br />
+      <ion-card-title>EUR 2151707777</ion-card-title>
+      <br />
+      <div (click)="clickAnything()" [routerLink]="['/star']">
+        <ion-icon
+          color="primary"
+          *ngFor="let item of list;let i = index"
+          [name]="condition <= i? 'star-outline' :'star' "
+          (click)="review(i)"
+        >
         </ion-icon>
       </div>
-     </ion-col>
+    </ion-col>
   </ion-item>
 
   <ion-card class="ion-padding">
-    <ion-segment value="buttons" >
+    <ion-segment value="buttons">
       <ion-segment-button value="executed">
         <ion-label>Health Check</ion-label>
       </ion-segment-button>
@@ -117,80 +126,91 @@
         <ion-label>Investment Ideas</ion-label>
       </ion-segment-button>
     </ion-segment>
-</ion-card>
+  </ion-card>
   <ion-card-subtitle>Open quality issues</ion-card-subtitle>
   <ion-list>
     <ion-radio-group name="buyProduct">
       <ion-item>
-        <ion-label>    Risk Analysis
-        </ion-label>
-        <br>
+        <ion-label> Risk Analysis </ion-label>
+        <br />
         <ion-radio slot="start" value="0123456789"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>  Analysis by asset class    
-        </ion-label>
-        <br>
+        <ion-label> Analysis by asset class </ion-label>
+        <br />
         <ion-radio slot="start" value="0234567891"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Bulk risks: Georg Fischer N
-        </ion-label>
-        <br>
-        <ion-radio slot="start" value="0345678912" id="0234567891" ng-click="count = count + 1" ng-init="count=0" [routerLink]="['/selected-issue', 'Georg Fischer N']"></ion-radio>
+        <ion-label>Bulk risks: Georg Fischer N </ion-label>
+        <br />
+        <ion-radio
+          slot="start"
+          value="0345678912"
+          id="0234567891"
+          ng-click="count = count + 1"
+          ng-init="count=0"
+          (click)="clickAnything()"
+          [routerLink]="['/selected-issue', 'Georg Fischer N']"
+        ></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Bulk risks: Peugeot SA
-        </ion-label>
-        <br>
-        <ion-radio slot="start" value="0345678913" id="0234567892" ng-click="count = count + 1" ng-init="count=0" [routerLink]="['/selected-issue', 'Peugeot SA']"></ion-radio>
+        <ion-label>Bulk risks: Peugeot SA </ion-label>
+        <br />
+        <ion-radio
+          slot="start"
+          value="0345678913"
+          id="0234567892"
+          ng-click="count = count + 1"
+          ng-init="count=0"
+          (click)="clickAnything()"
+          [routerLink]="['/selected-issue', 'Peugeot SA']"
+        ></ion-radio>
       </ion-item>
-      <ion-item-divider> 
-      </ion-item-divider>
+      <ion-item-divider> </ion-item-divider>
       <ion-item>
-        <ion-label> Not moniored Instruments: 2 Temenos 22
-        </ion-label>
-        <br>
+        <ion-label> Not moniored Instruments: 2 Temenos 22 </ion-label>
+        <br />
         <ion-radio slot="start" value="0345678914" id="0234567893"></ion-radio>
       </ion-item>
     </ion-radio-group>
-  </ion-list>  
-      <ion-item-divider> 
-      </ion-item-divider> 
-      <ion-card class="welcome-card">
-        <ion-card-header>
-          <ion-card-title>
-          Not moniored Instruments: BZR.KHZ.EUR
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-        </ion-card-content>
-      </ion-card>  
-      <ion-card class="welcome-card">
-        <ion-card-header>
-          <ion-card-title>
-          Not moniored Instruments: JSS In the Eq GI PD 
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-        </ion-card-content>
-      </ion-card>  
+  </ion-list>
+  <ion-item-divider> </ion-item-divider>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title> Not moniored Instruments: BZR.KHZ.EUR </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> </ion-card-content>
+  </ion-card>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>
+        Not moniored Instruments: JSS In the Eq GI PD
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> </ion-card-content>
+  </ion-card>
 
-      <ion-item-divider>
-        <ion-text color="dark">
-          <ion-card-subtitle>No quality issues</ion-card-subtitle>
-        </ion-text>
-      </ion-item-divider>
-      <ion-card class="welcome-card" [routerLink]="['/no-issue']">
-        <ion-card-header>
-          <ion-card-title>
-          No quality issues 
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-        </ion-card-content>
-      </ion-card>
-    <p>As a client with UBS Advice, you can contact your client advisor anytime and involve him/her in the optimization of your portfolio whenever needed       </p>
-    <ion-button expand="block" color="dark">Get Proposal</ion-button><br>
-    <ion-button expand="block" color="light" (click)="presentConfirmationModal()">Take no action (all)</ion-button>
+  <ion-item-divider>
+    <ion-text color="dark">
+      <ion-card-subtitle>No quality issues</ion-card-subtitle>
+    </ion-text>
+  </ion-item-divider>
+  <ion-card
+    class="welcome-card"
+    (click)="clickAnything()"
+    [routerLink]="['/no-issue']"
+  >
+    <ion-card-header>
+      <ion-card-title> No quality issues </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> </ion-card-content>
+  </ion-card>
+  <p>
+    As a client with UBS Advice, you can contact your client advisor anytime and
+    involve him/her in the optimization of your portfolio whenever needed
+  </p>
+  <ion-button expand="block" color="dark">Get Proposal</ion-button><br />
+  <ion-button expand="block" color="light" (click)="presentConfirmationModal()"
+    >Take no action (all)</ion-button
+  >
 </ion-content>

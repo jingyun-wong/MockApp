@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/improve-quality-review']">
+    <ion-buttons
+      slot="start"
+      (click)="clickAnything()"
+      [routerLink]="['/improve-quality-review']"
+    >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title>Health Check</ion-title>
@@ -10,22 +14,26 @@
 
 <ion-content>
   <ion-card class="ion-padding">
-  <ion-card-title>Please read the documentation below</ion-card-title>
+    <ion-card-title>Please read the documentation below</ion-card-title>
   </ion-card>
 
   <ion-card class="ion-padding">
     <ion-card-title size="6">Peugeot SA</ion-card-title>
-    <hr>
+    <hr />
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="6">Product Information</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
-        
+
         <ion-row>
           <ion-col size="6">Cost Report</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
@@ -33,35 +41,45 @@
 
   <ion-card class="ion-padding">
     <ion-card-title size="6">Continental</ion-card-title>
-    <hr>
+    <hr />
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="6">Product Information</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
-        
+
         <ion-row>
           <ion-col size="6">Cost Report</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 
   <ion-card class="ion-padding">
-    <ion-card-title size="6">Initial proposal & suitability statement</ion-card-title>
-    <hr>
+    <ion-card-title size="6"
+      >Initial proposal & suitability statement</ion-card-title
+    >
+    <hr />
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="6">Initial proposal</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
-        
+
         <ion-row>
           <ion-col size="6">Suitability statement</ion-col>
-          <ion-col size="6"><ion-icon color="medium" name="chevron-forward-outline"></ion-icon></ion-col>
+          <ion-col size="6"
+            ><ion-icon color="medium" name="chevron-forward-outline"></ion-icon
+          ></ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
@@ -70,7 +88,8 @@
   <ion-card>
     <ion-card-content>
       <ion-text color="dark">
-      Suitability statements and cost report will be provided as e-documents. All other documents are available in Quotes.
+        Suitability statements and cost report will be provided as e-documents.
+        All other documents are available in Quotes.
       </ion-text>
     </ion-card-content>
   </ion-card>
@@ -80,11 +99,14 @@
       <ion-row>
         <ion-col>
           <ion-text color="dark">
-          I confirm that I have received the above documentation.
+            I confirm that I have received the above documentation.
           </ion-text>
         </ion-col>
         <ion-col>
-          <ion-toggle [(ngModel)]="toggleState"></ion-toggle>
+          <ion-toggle
+            (click)="clickAnything()"
+            [(ngModel)]="toggleState"
+          ></ion-toggle>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -92,10 +114,22 @@
 
   <ion-card>
     <ion-card-content>
-      For the instrument listed on top, no immediate execution of orders is possible. Choose "Trandsmit Orders" to place the execution with your client advisor. Please note that your client advisor will process your orders in the ordinary course of business on bank working days. The execution may take place without consulting with you again. If your orders are time-critical, please contact your client advisor directly.
+      For the instrument listed on top, no immediate execution of orders is
+      possible. Choose "Trandsmit Orders" to place the execution with your
+      client advisor. Please note that your client advisor will process your
+      orders in the ordinary course of business on bank working days. The
+      execution may take place without consulting with you again. If your orders
+      are time-critical, please contact your client advisor directly.
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" color="success" [disabled]="!toggleState" [routerLink]="['/improve-quality-success']">Transmit orders</ion-button><br>
+  <ion-button
+    expand="block"
+    color="success"
+    [disabled]="!toggleState"
+    (click)="clickAnything()"
+    [routerLink]="['/improve-quality-success']"
+    >Transmit orders</ion-button
+  ><br />
   <ion-button expand="block" color="light">Contact client advisor</ion-button>
 </ion-content>

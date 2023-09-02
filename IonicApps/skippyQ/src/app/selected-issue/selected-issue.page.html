@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/health-check']">
+    <ion-buttons
+      slot="start"
+      (click)="clickAnything()"
+      [routerLink]="['/health-check']"
+    >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title>Portfolio Quality</ion-title>
@@ -11,11 +15,11 @@
 <ion-content>
   <ion-text color="dark" *ngIf="issue === 'Georg Fischer N'">
     There is currently no investment proposal available for you
-   </ion-text>
-  <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
-   You have more than 10% of your portfolio invested in Peugeot SA.
   </ion-text>
-  
+  <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
+    You have more than 10% of your portfolio invested in Peugeot SA.
+  </ion-text>
+
   <ion-item-divider>
     <ion-text color="dark">
       <ion-card-subtitle>Quality issues</ion-card-subtitle>
@@ -24,32 +28,46 @@
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-title (click)="goToHCDetailsPage()">
-Bulk risks: {{ issue }}
+        Bulk risks: {{ issue }}
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
+    <ion-card-content> </ion-card-content>
   </ion-card>
 
   <ion-text color="dark" *ngIf="issue === 'Georg Fischer N'">
-    Please request a personalized investment proposal from client advisor 
-   </ion-text>
-   <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
-    In case you have questions according this issue, please contact your client advisor. 
-   </ion-text>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-  <ion-button expand="block" color="dark" *ngIf="issue === 'Georg Fischer N'" [routerLink]="['/request-proposal']">Request proposal</ion-button><br>
-  <ion-button expand="block" color="dark" *ngIf="issue === 'Peugeot SA'" [routerLink]="['/improve-quality']">Improve Quality</ion-button><br>
+    Please request a personalized investment proposal from client advisor
+  </ion-text>
+  <ion-text color="dark" *ngIf="issue === 'Peugeot SA'">
+    In case you have questions according this issue, please contact your client
+    advisor.
+  </ion-text>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <ion-button
+    expand="block"
+    color="dark"
+    *ngIf="issue === 'Georg Fischer N'"
+    (click)="clickAnything()"
+    [routerLink]="['/request-proposal']"
+    >Request proposal</ion-button
+  ><br />
+  <ion-button
+    expand="block"
+    color="dark"
+    *ngIf="issue === 'Peugeot SA'"
+    (click)="clickAnything()"
+    [routerLink]="['/improve-quality']"
+    >Improve Quality</ion-button
+  ><br />
   <ion-button expand="block" color="light">Contact client advisor</ion-button>
 </ion-content>

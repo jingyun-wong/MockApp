@@ -1,31 +1,44 @@
 <ion-header class="ion-padding">
   <ion-toolbar>
     <ion-row>
-    <ion-col>
-    <ion-title></ion-title>
-
-    </ion-col>
+      <ion-col>
+        <ion-title></ion-title>
+      </ion-col>
     </ion-row>
-    <br>
+    <br />
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" style="justify-content: center">
   <div class="ion-text-center">
-  <ion-icon size="large" color="success" name="checkmark-circle-outline"></ion-icon>
-  <br>
-  <br>
-  <br>
-  <ion-text>Your orders have been transmitted to your client advisor with proposal number: 668</ion-text>
-  <br>
-  <ion-text>Please note that your client advisor will process your orders in the ordinary course of business on bank working days. The execution may take place without consulting you again. If your orders are time-critical, please contact your client advisor directly.</ion-text>
-<br>
-  <ion-text color="primary">Contact Client Advisor</ion-text>
-  <ion-button color="light" expand="block" [routerLink]="['/health-check']" >
-    Close
-  </ion-button>
-
+    <ion-icon
+      size="large"
+      color="success"
+      name="checkmark-circle-outline"
+    ></ion-icon>
+    <br />
+    <br />
+    <br />
+    <ion-text
+      >Your orders have been transmitted to your client advisor with proposal
+      number: 668</ion-text
+    >
+    <br />
+    <ion-text
+      >Please note that your client advisor will process your orders in the
+      ordinary course of business on bank working days. The execution may take
+      place without consulting you again. If your orders are time-critical,
+      please contact your client advisor directly.</ion-text
+    >
+    <br />
+    <ion-text color="primary">Contact Client Advisor</ion-text>
+    <ion-button
+      color="light"
+      expand="block"
+      (click)="clickAnything()"
+      [routerLink]="['/health-check']"
+    >
+      Close
+    </ion-button>
   </div>
 </ion-content>
-
-
