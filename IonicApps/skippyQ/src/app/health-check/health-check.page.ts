@@ -46,13 +46,9 @@ export class HealthCheckPage implements OnInit {
     localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
   }
 
-  condition: number = 0;
+  condition: number = 4;
   list: any[] = new Array(5);
 
-  review(i) {
-    this.condition = i + 1;
-    // your code........
-  }
   clickAnything() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
