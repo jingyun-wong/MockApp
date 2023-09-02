@@ -110,7 +110,6 @@
           color="primary"
           *ngFor="let item of list;let i = index"
           [name]="condition <= i? 'star-outline' :'star' "
-          (click)="review(i)"
         >
         </ion-icon>
       </div>
@@ -209,8 +208,17 @@
     As a client with UBS Advice, you can contact your client advisor anytime and
     involve him/her in the optimization of your portfolio whenever needed
   </p>
-  <ion-button expand="block" color="dark">Get Proposal</ion-button><br />
-  <ion-button expand="block" color="light" (click)="presentConfirmationModal()"
-    >Take no action (all)</ion-button
-  >
+  <ion-toolbar class="floating-toolbar">
+    <ion-button expand="block" color="dark">Get Proposal</ion-button><br />
+    <ion-button
+      expand="block"
+      color="light"
+      *ngIf="!showTakeNoAction"
+      (click)="presentConfirmationModal()"
+      >Take no action (all)</ion-button
+    >
+    <ion-button expand="block" color="light" *ngIf="showTakeNoAction"
+      >Contact client advisor</ion-button
+    >
+  </ion-toolbar>
 </ion-content>
