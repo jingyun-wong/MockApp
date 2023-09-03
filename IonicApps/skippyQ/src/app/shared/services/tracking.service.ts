@@ -10,8 +10,6 @@ import { filter, pairwise } from "rxjs/operators";
 import { url } from 'inspector';
 import { observable } from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,8 +30,6 @@ export class TrackingService {
 
   constructor(private router: Router, private SqlService: SqlService) {
 
-
-    // 
     // change in screens
     this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise()).subscribe((events: RoutesRecognized[]) => {
       console.log('previous url', events[0].urlAfterRedirects);
@@ -41,16 +37,19 @@ export class TrackingService {
       var pageName = ""
       var domainName = ""
 
-
+  
       // get total time spent on the page
       var url = this.urlConvert(events[0].urlAfterRedirects)
 
-      if (url == "/home") {
+      if (url == "/home"){
         pageName = "home"
-        domainName = "home"
-
+        domainName = "home"  
       }
 
+      // view Trades task - eTrading
+      else if (url == "/trading-home"){
+        pageName = "tradingHome"
+        domainName = "eTrading"
       // view Trades task - eTrading
       else if (url == "/trading-home") {
         pageName = "tradingHome"
