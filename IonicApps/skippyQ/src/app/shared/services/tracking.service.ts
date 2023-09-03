@@ -10,8 +10,6 @@ import {filter,pairwise} from "rxjs/operators";
 import { url } from 'inspector';
 import { observable } from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +18,6 @@ export class TrackingService {
 
   private cache: {[id: number]: {description: string, time: number}} = {};
   
-
   urlConvert(currentUrl){
     if (currentUrl.includes(';')){
       return String(currentUrl.split(';')[0])
@@ -30,15 +27,8 @@ export class TrackingService {
 
   }
 
- 
-
-  
-  
-
   constructor(private router: Router, private SqlService: SqlService) {
 
-    
-    // 
     // change in screens
     this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise()).subscribe((events: RoutesRecognized[]) => {
       console.log('previous url', events[0].urlAfterRedirects);
@@ -47,43 +37,40 @@ export class TrackingService {
       var domainName = ""
 
   
-            // get total time spent on the page
-            var url = this.urlConvert(events[0].urlAfterRedirects)
+      // get total time spent on the page
+      var url = this.urlConvert(events[0].urlAfterRedirects)
 
+      if (url == "/home"){
+        pageName = "home"
+        domainName = "home"  
+      }
 
-            
-            if (url == "/home"){
-              pageName = "home"
-              domainName = "home"
-            
-            }
+      // view Trades task - eTrading
+      else if (url == "/trading-home"){
+        pageName = "tradingHome"
+        domainName = "eTrading"
 
-            // view Trades task - eTrading
-            else if (url == "/trading-home"){
-              pageName = "tradingHome"
-              domainName = "eTrading"
+      }
+      else if (url == "/trade-details"){
+        pageName = "tradeDetails"
+        domainName = "eTrading"
 
-            }
-            else if (url == "/trade-details"){
-              pageName = "tradeDetails"
-              domainName = "eTrading"
-
-            }
-            // buy trade Task - eTrading
-            else if (url == "/buy-trade"){
-              pageName = "buyTrade"
-              domainName = "eTrading"
-              
-            }
-            else if (url == "/buy-trade-stock"){
-              pageName = "buyTradeStock"
-              domainName = "eTrading"
-              
-            }
-            else if (url=="/buy-trade-stock-success"){
-              pageName = "buyTradeStockSuccess"
-              domainName = "eTrading"
-            }
+      }
+      // buy trade Task - eTrading
+      else if (url == "/buy-trade"){
+        pageName = "buyTrade"
+        domainName = "eTrading"
+        
+      }
+      else if (url == "/buy-trade-stock"){
+        pageName = "buyTradeStock"
+        domainName = "eTrading"
+        
+      }
+      else if (url=="/buy-trade-stock-success"){
+        pageName = "buyTradeStockSuccess"
+        domainName = "eTrading"
+      }
 
             else if (url=="/buy-trade-stock-review"){
               pageName = "buyTradeStockReview"
@@ -95,7 +82,7 @@ export class TrackingService {
               domainName = "eTrading"
 
             }
-           
+          
             // sell trade flow
             else if (url == '/sell-trade'){
               pageName = "sellTrade"
@@ -110,7 +97,7 @@ export class TrackingService {
               pageName = "sellTradeStockReview"
               domainName = "eTrading"
             }
-           
+          
             else if (url =="/sell-trade-stock-completed"){
               pageName ="sellTradeStockCompleted"
               domainName = "eTrading"
@@ -169,27 +156,9 @@ export class TrackingService {
 
             }
 
-
-
-          
-            
-
-
-            
-
-        
             this.SqlService.postTrackingMetrics(this.trackPageMetrics(pageName,domainName))
             
-
-    
-    
-            
-    
-  
     });
-   
-    
-
   }
 
 makeid(length) {
@@ -204,15 +173,12 @@ makeid(length) {
     return result;
 }
 
-
-
-
   // set a current session 
   setUser(){
     // local storage can only handle strings
     localStorage.setItem("sessionId",JSON.stringify(this.makeid(28)));
     // localStorage.setItem("customerId", JSON.stringify(Math.floor(Math.random() * (1010 - 1000 + 1) + 1000)));
-       localStorage.setItem("customerId", JSON.stringify(2295));
+    localStorage.setItem("customerId", JSON.stringify(2295));
     localStorage.setItem("dateEntered", new Date().toISOString());
     localStorage.setItem("pageCount", JSON.stringify(0));
     localStorage.setItem("pageClicks",JSON.stringify(0));
@@ -220,25 +186,13 @@ makeid(length) {
     localStorage.setItem("backEndErrors",JSON.stringify(0))
     localStorage.setItem("dbLoadTime",JSON.stringify(0))
     localStorage.setItem('pageLoadTime', JSON.stringify(0))
-
-
-
-
   }
-
-
 
   trackPageMetrics(pageName,domainName){
 
 
 // getting the button details  
-
-    
-
     var pageCount = parseInt(localStorage.getItem("pageCount"))
-
-
-    
 
     var jsonbody = {
       "sessionId": JSON.parse(localStorage.getItem("sessionId")),
@@ -252,7 +206,6 @@ makeid(length) {
       "frontEndErrors":parseInt(localStorage.getItem("frontEndErrors")),
       "backEndErrors":parseInt(localStorage.getItem("backEndErrors")),
       "renderDuration":Number(parseFloat(localStorage.getItem("pageLoadTime")).toFixed(5))
-    
     }
 
     console.log(jsonbody)
@@ -263,13 +216,6 @@ makeid(length) {
     localStorage.setItem("pageCount",JSON.stringify(pageCount+1))
     localStorage.setItem('dbLoadTime',JSON.stringify(0))
 
-  
-
-
     return jsonbody
-    
-    
   }
-
-
 }
