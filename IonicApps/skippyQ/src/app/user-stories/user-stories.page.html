@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"></ion-buttons>
+    <ion-title>Choose user stories</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+  <ion-list *ngFor="let userStory of userStories | keyvalue">
+    <ion-item-divider>
+      <ion-text>
+        <h4>{{userStory.key}}</h4>
+      </ion-text>
+    </ion-item-divider>
+    <ion-item *ngFor="let story of userStory.value" detail="true" [routerLink]="['/home']">
+      <ion-label class="ion-text-wrap">
+        <h3>{{story.name}}</h3>
+        <p>{{story.desc}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+  

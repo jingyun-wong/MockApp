@@ -114,7 +114,7 @@ export class AppComponent {
     this.platform.ready().then(async () => {
       
   
-      this.router.navigate(['/home'])
+      this.router.navigate(['/user-stories'])
       localStorage.clear()
       this.trackingService.setUser();
       
