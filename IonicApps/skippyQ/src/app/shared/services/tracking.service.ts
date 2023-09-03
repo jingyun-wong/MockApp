@@ -50,11 +50,6 @@ export class TrackingService {
       else if (url == "/trading-home"){
         pageName = "tradingHome"
         domainName = "eTrading"
-      // view Trades task - eTrading
-      else if (url == "/trading-home") {
-        pageName = "tradingHome"
-        domainName = "eTrading"
-
       }
       else if (url == "/trade-details") {
         pageName = "tradeDetails"
