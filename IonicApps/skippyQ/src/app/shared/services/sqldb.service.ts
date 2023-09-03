@@ -5,6 +5,7 @@ import {investment} from '../models/investment'
 
 import { Observable } from 'rxjs';
 import { tradingIdea } from '../models/trading-idea';
+import { userStories } from '../models/user-stories';
 @Injectable()
 export class SqlService {
   private headers: HttpHeaders;
@@ -15,6 +16,11 @@ constructor(private http: HttpClient) {
     const headers = { 'content-type': 'application/json'}  
 
 }
+
+    // get userStories
+    getUserStories() {
+        return this.http.get<userStories>('http://localhost:2345/get/userstories')
+    }
 
     // get investmentideas
     getInvestmentIdeas() {
