@@ -65,8 +65,12 @@ export class AppComponent {
       this.router.navigate(['/user-stories'])
       localStorage.clear()
     });
+  }
 
-
+  endStory(){
+    alert('You have chose to end this user story testing'); 
+    this.router.navigate(['/user-stories'])
+    localStorage.clear()
   }
 
 
