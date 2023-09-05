@@ -2,48 +2,42 @@
   <ion-toolbar>
     <ion-buttons slot="start" [routerLink]="['/trading-home']">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
-
     </ion-buttons>
     <ion-row>
       <ion-col>
         <ion-title>{{orderType}} {{portfolioType}}</ion-title>
       </ion-col>
     </ion-row>
-    <br>
-
+    <br />
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding" style="justify-content: center">
-
-  <ion-card color="primary" >
-
+  <ion-card color="primary">
     <ion-label>
       <ion-col>
         <ion-card-title>{{portfolioType}}</ion-card-title>
-        <br>
-        <br><ion-card-subtitle color="medium">Bid {{bidPrice}} Ask {{askPrice}}</ion-card-subtitle>
-        <br><ion-card-subtitle color="medium">22.02.2018, 15:53 CT</ion-card-subtitle>
+        <br />
+        <br /><ion-card-subtitle color="medium"
+          >Bid {{bidPrice}} Ask {{askPrice}}</ion-card-subtitle
+        >
+        <br /><ion-card-subtitle color="medium"
+          >22.02.2018, 15:53 CT</ion-card-subtitle
+        >
       </ion-col>
 
       <div class="ion-text-end">
         <ion-card-title>{{settlementCurrency}} {{price}}</ion-card-title>
       </div>
-
     </ion-label>
-
   </ion-card>
 
   <ion-card class="card-center">
-    <ion-card-content >
+    <ion-card-content>
       <ion-item>
         <ion-label>Order Status</ion-label>
 
         <ion-text>{{orderStatus}}</ion-text>
-
-
-
       </ion-item>
       <ion-item>
         <ion-label>Order Type</ion-label>
@@ -53,88 +47,77 @@
         <ion-label>Portfolio</ion-label>
 
         <ion-text>{{portfolio_acc}}</ion-text>
-
       </ion-item>
       <ion-item>
         <ion-label>Account</ion-label>
-        <ion-text >{{account}}</ion-text>
+        <ion-text>{{account}}</ion-text>
       </ion-item>
-
-
-
     </ion-card-content>
-
-
   </ion-card>
 
+  <div class="ion-padding"></div>
 
-  <div class="ion-padding">
-  </div>
+  <ion-segment value="buttons" [(ngModel)]="selectedDetail">
+    <ion-segment-button value="Order">
+      <ion-label>Order Data</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Execution">
+      <ion-label>Execution</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Settlement">
+      <ion-label>Settlement</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-    <ion-segment value="buttons" [(ngModel)]="selectedDetail">
-      <ion-segment-button value="Order" >
-        <ion-label>Order Data</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Execution" >
-        <ion-label>Execution</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Settlement">
-        <ion-label>Settlement</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-
-
-
-  <br>
-  <ion-card *ngIf="selectedDetail== 'Order'" >
-  <ion-item  *ngFor="let item of orderKeys">
-            <ion-label>{{item}}</ion-label>
-            <ion-text class="ion-text-end">{{orderData[item]}}</ion-text>
-  </ion-item>
+  <br />
+  <ion-card *ngIf="selectedDetail== 'Order'">
+    <ion-item *ngFor="let item of orderKeys">
+      <ion-label>{{item}}</ion-label>
+      <ion-text class="ion-text-end">{{orderData[item]}}</ion-text>
+    </ion-item>
   </ion-card>
-  <ion-card *ngIf="selectedDetail== 'Execution'" >
-  <ion-item   *ngFor="let execute of executedKeys">
-    <ion-label>{{execute}}</ion-label>
-    <ion-text class="ion-text-end">{{executedData[execute]}}</ion-text>
-  </ion-item>
+  <ion-card *ngIf="selectedDetail== 'Execution'">
+    <ion-item *ngFor="let execute of executedKeys">
+      <ion-label>{{execute}}</ion-label>
+      <ion-text class="ion-text-end">{{executedData[execute]}}</ion-text>
+    </ion-item>
   </ion-card>
 
   <ion-card *ngIf="selectedDetail === 'Settlement'">
-  <ion-item  *ngFor="let settle of settleKeys">
-    <ion-label>{{settle}}</ion-label>
-    <ion-text class="ion-text-end">{{settlementData[settle]}}</ion-text>
-  </ion-item>
+    <ion-item *ngFor="let settle of settleKeys">
+      <ion-label>{{settle}}</ion-label>
+      <ion-text class="ion-text-end">{{settlementData[settle]}}</ion-text>
+    </ion-item>
   </ion-card>
 
+  <ion-card> </ion-card>
 
-
-
-  <ion-card>
-
-  </ion-card>
-
-  <ion-button expand="block" *ngIf="orderStatus == 'Pending'" (click)="cancel()" >
+  <ion-button
+    expand="block"
+    *ngIf="orderStatus == 'Pending'"
+    (click)="cancel()"
+  >
     Cancel
   </ion-button>
-  <ion-button expand="block" *ngIf="orderStatus == 'Closed'" (click)="orderOverview()" >
+  <ion-button
+    expand="block"
+    *ngIf="orderStatus == 'Closed'"
+    (click)="orderOverview()"
+  >
     Renew
   </ion-button>
-  <ion-button expand="block" *ngIf="orderStatus == 'Executed'" (click)="orderOverview()" >
+  <ion-button
+    expand="block"
+    *ngIf="orderStatus == 'Executed'"
+    (click)="orderOverview()"
+  >
     Renew
   </ion-button>
-  <ion-button expand="block" *ngIf="orderStatus == 'Partially Executed'" (click)="cancel()" >
+  <ion-button
+    expand="block"
+    *ngIf="orderStatus == 'Partially Executed'"
+    (click)="cancel()"
+  >
     Cancel
   </ion-button>
-
-
-
-
-
-
-
-
-
-
 </ion-content>
-
-
