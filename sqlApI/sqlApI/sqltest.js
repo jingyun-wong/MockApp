@@ -105,6 +105,31 @@ app.post('/add/trackingMetrics', function (req, res) {
     });
 });
 
+// get user stories
+app.get('/get/userstories', function (req, res) {
+    var sql = require("mssql");
+
+    sql.connect(config, function (err) {
+    
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+    
+        // query to the database and get the records
+        request.query('select * from [dbo].[userStory]', function (err, recordset) {
+            
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully retrieved  data",
+                'Data': recordset
+            });
+        }
+    )})}
+)
 
 
 // get trading

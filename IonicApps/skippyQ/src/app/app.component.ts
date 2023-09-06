@@ -17,13 +17,6 @@ import { TrackingService } from './shared/services/tracking.service';
 import { SqlService } from './shared/services/sqldb.service';
 import { key } from 'localforage';
 
-
-
-
-
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -58,70 +51,26 @@ export class AppComponent {
     private idle: Idle,
     private trackingService: TrackingService,
     private SqlService : SqlService,
-  
-
   ) {
-
-
     this.initializeApp();
-
-    
 
      // when user place the app in the background
     this.platform.pause.subscribe(async () => {
           alert('Pause event detected');
-    });
-
-    // set the idle period
-    
-    idle.setIdle(20);
-    idle.setTimeout(20);
-    idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
-
-    idle.watch();
-
-    idle.onTimeoutWarning.subscribe((countdown: number) => {
-            console.log('Timeout Warning - ' + countdown);
-    });
-
-
-
-    idle.onTimeout.subscribe(() => {
-          
-          alert('Timeout');
-
-        
-
-    
-    
-          idle.stop();
-          localStorage.clear();
-          this.initializeApp()
-           
-    });
-
-  
-
-    
+    }); 
   }
 
-
-
-
   initializeApp() {
-    
-
     this.platform.ready().then(async () => {
-      
-  
-      this.router.navigate(['/home'])
+      this.router.navigate(['/user-stories'])
       localStorage.clear()
-      this.trackingService.setUser();
-      
-
     });
+  }
 
-
+  endStory(){
+    alert('You have chose to end this user story testing'); 
+    this.router.navigate(['/user-stories'])
+    localStorage.clear()
   }
 
 
