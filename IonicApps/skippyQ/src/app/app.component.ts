@@ -24,12 +24,9 @@ import { key } from 'localforage';
 })
 export class AppComponent {
   rootPage:any = 'HomePage';
-
   idleState = 'Not started.';
   timedOut = false;
-
   abandoned = [];
-
 
   public adminPages = [
     {
@@ -73,5 +70,23 @@ export class AppComponent {
     localStorage.clear()
   }
 
+  onHome(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+  }
 
+  onAssets(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+  }
+
+  onAccounts(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+  }
+
+  onDII(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+  }
+
+  onTrading(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+  }
 }

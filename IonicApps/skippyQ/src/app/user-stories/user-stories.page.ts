@@ -12,7 +12,6 @@ import { TrackingService } from '../shared/services/tracking.service';
   styleUrls: ['user-stories.page.scss']
 })
 
-
 export class UserStoriesPage implements OnInit {
 
   userStories: {[key:string]: userStories[]} = {};
@@ -23,9 +22,7 @@ export class UserStoriesPage implements OnInit {
     private platform: Platform,
     private router: Router,
     private trackingService: TrackingService,
-  ){
-
-  }
+  ){}
 
   ngOnInit() {
     this.SqlService.getUserStories().subscribe(result => {

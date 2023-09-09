@@ -32,12 +32,22 @@ export class TrackingService {
 
     // change in screens
     this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise()).subscribe((events: RoutesRecognized[]) => {
+      
+      localStorage.setItem("totalPageVisits", JSON.stringify(parseFloat(localStorage.getItem("totalPageVisits")) + 1))
+      localStorage.setItem("totalClicks", JSON.stringify(parseFloat(localStorage.getItem("totalClicks")) + parseInt(localStorage.getItem("pageClicks"))))
+      localStorage.setItem("totalLoadTime", JSON.stringify(parseFloat(localStorage.getItem("totalLoadTime")) + parseFloat(localStorage.getItem("pageLoadTime"))))
+      localStorage.setItem("totalDBLoadTime", JSON.stringify(parseFloat(localStorage.getItem("totalDBLoadTime")) + parseFloat(localStorage.getItem("dbLoadTime"))))
+
+      console.log("CLICKS", localStorage.getItem('pageClicks'),parseInt(localStorage.getItem('totalClicks')))
+      console.log("elapsedTime", localStorage.getItem('elapsedTime'),parseInt(localStorage.getItem('journeyElapsedTime')))
+      console.log("loadTime", localStorage.getItem('pageLoadTime'),parseInt(localStorage.getItem('totalLoadTime')))
+      console.log("dbTime", localStorage.getItem('dbLoadTime'),parseInt(localStorage.getItem('totalDBLoadTime')))
       console.log('previous url', events[0].urlAfterRedirects);
       console.log('current url', events[1].urlAfterRedirects);
+      
       var pageName = ""
       var domainName = ""
 
-  
       // get total time spent on the page
       var url = this.urlConvert(events[0].urlAfterRedirects)
 
@@ -231,16 +241,48 @@ export class TrackingService {
   // set a current session 
   setUser(userStoryId) {
     // local storage can only handle strings
+    // details of user stories
     localStorage.setItem("sessionId", JSON.stringify(this.makeid(28)));
     localStorage.setItem("userStoryId", JSON.stringify(userStoryId));
     localStorage.setItem("customerId", JSON.stringify(2295));
     localStorage.setItem("dateEntered", new Date().toISOString());
+    // pages
+    localStorage.setItem("totalPageVisits", JSON.stringify(0));
     localStorage.setItem("pageCount", JSON.stringify(0));
+    // clicks
+    localStorage.setItem("totalClicks", JSON.stringify(0));
     localStorage.setItem("pageClicks", JSON.stringify(0));
+    // errors
     localStorage.setItem("frontEndErrors", JSON.stringify(0));
     localStorage.setItem("backEndErrors", JSON.stringify(0))
+    // time
+    localStorage.setItem("journeyElapsedTime", JSON.stringify(window.performance.now()))
+    localStorage.setItem("totalLoadTime", JSON.stringify(0))
+    localStorage.setItem("totalDBLoadTime", JSON.stringify(0))
+    localStorage.setItem("elapsedTime", JSON.stringify(0))
     localStorage.setItem("dbLoadTime", JSON.stringify(0))
     localStorage.setItem('pageLoadTime', JSON.stringify(0))
+  }
+
+  trackJourneyMetrics(finalTiming){
+    console.log("END OF USER STORY")
+    console.log("JOURNEY METRICS");
+    var pageCount = parseInt(localStorage.getItem("pageCount"))
+
+    var jsonbody = {
+      "sessionId": JSON.parse(localStorage.getItem("sessionId")),
+      "userStoryId": JSON.parse(localStorage.getItem("userStoryId")),
+      "totalClicks": JSON.parse(localStorage.getItem("totalClicks")),
+      "elapsedTime": (finalTiming - parseFloat(localStorage.getItem("journeyElapsedTime"))),
+      "totalLoadTime": JSON.parse(localStorage.getItem("totalLoadTime")),
+      "totalDBLoadTime": JSON.parse(localStorage.getItem("totalDBLoadTime")),
+      "totalPageVisits": pageCount,
+      "insertTimestamp": Date.now(),
+      "frontendErrors": JSON.parse(localStorage.getItem("frontendErrors")),
+      "backendErrors": JSON.parse(localStorage.getItem("backendErrors")),
+    }
+
+    console.log(jsonbody)
   }
 
   trackPageMetrics(pageName, domainName) {
