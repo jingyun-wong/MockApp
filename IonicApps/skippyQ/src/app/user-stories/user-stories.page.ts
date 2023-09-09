@@ -45,8 +45,10 @@ export class UserStoriesPage implements OnInit {
     })
   }
 
-  toHomePage(){
+  toHomePage(userStoryId){
     // set the idle period
+    localStorage.clear();
+    this.trackingService.setUser(userStoryId);
     this.idle.setIdle(20);
     this.idle.setTimeout(20);
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
@@ -69,7 +71,6 @@ export class UserStoriesPage implements OnInit {
     this.platform.ready().then(async () => {
       this.router.navigate(['/user-stories'])
       localStorage.clear()
-      this.trackingService.setUser();
     });
   }
 }
