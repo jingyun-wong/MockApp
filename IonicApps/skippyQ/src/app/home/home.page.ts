@@ -46,8 +46,8 @@ export class HomePage implements OnInit {
   myManage() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-
   }
+  
   myAdvice() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))

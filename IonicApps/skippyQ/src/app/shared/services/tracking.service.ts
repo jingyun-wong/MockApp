@@ -229,10 +229,10 @@ export class TrackingService {
   }
 
   // set a current session 
-  setUser() {
+  setUser(userStoryId) {
     // local storage can only handle strings
     localStorage.setItem("sessionId", JSON.stringify(this.makeid(28)));
-    // localStorage.setItem("customerId", JSON.stringify(Math.floor(Math.random() * (1010 - 1000 + 1) + 1000)));
+    localStorage.setItem("userStoryId", JSON.stringify(userStoryId));
     localStorage.setItem("customerId", JSON.stringify(2295));
     localStorage.setItem("dateEntered", new Date().toISOString());
     localStorage.setItem("pageCount", JSON.stringify(0));
@@ -241,7 +241,6 @@ export class TrackingService {
     localStorage.setItem("backEndErrors", JSON.stringify(0))
     localStorage.setItem("dbLoadTime", JSON.stringify(0))
     localStorage.setItem('pageLoadTime', JSON.stringify(0))
-
   }
 
   trackPageMetrics(pageName, domainName) {
@@ -250,6 +249,7 @@ export class TrackingService {
 
     var jsonbody = {
       "sessionId": JSON.parse(localStorage.getItem("sessionId")),
+      "userStoryId": JSON.parse(localStorage.getItem("userStoryId")),
       "customerId": JSON.parse(localStorage.getItem("customerId")),
       "domainName": domainName,
       "pageName": pageName,
@@ -260,7 +260,6 @@ export class TrackingService {
       "frontEndErrors": parseInt(localStorage.getItem("frontEndErrors")),
       "backEndErrors": parseInt(localStorage.getItem("backEndErrors")),
       "renderDuration": Number(parseFloat(localStorage.getItem("pageLoadTime")).toFixed(5))
-
     }
 
     console.log(jsonbody)
