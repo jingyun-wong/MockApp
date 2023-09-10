@@ -1,51 +1,33 @@
+<ion-content [fullscreen]="true" style="justify-content: center">
+  <div class="ion-text-center">
+    <ion-icon
+      size="large"
+      name="alert-circle-outline"
+      color="warning"
+    ></ion-icon>
+    <br />
+    <br />
+    <br />
+    <ion-text>Request for order cancellation</ion-text>
+    <br />
+    <br />
+    <br />
+    <ion-text>Do you want to request for cancellation of this order</ion-text>
 
+    <ion-button
+      expand="block"
+      [routerLink]="['/cancel-order-successful']"
+      (click)="cancelSuccessful()"
+    >
+      Yes
+    </ion-button>
 
-
-
-
-
-
-  <ion-content [fullscreen]="true" style="justify-content: center">
-    <div class="ion-text-center">
-      <ion-icon size="large" name="alert-circle-outline" color="warning" ></ion-icon>
-      <br>
-      <br>
-      <br>
-      <ion-text>Request for order cancellation</ion-text>
-      <br>
-      <br>
-      <br>
-      <ion-text>Do you want to request for cancellation of this order</ion-text>
-
-
-
-
-
-      <ion-button expand="block" [routerLink]="['/cancel-order-successful']" (click)="cancelSuccessful()" >
-        Yes
-      </ion-button>
-
-
-      <ion-button expand="block" [routerLink]="['/trading-home']" (click)="cancelAbort()" >
-        No
-      </ion-button>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <ion-button
+      expand="block"
+      [routerLink]="['/trading-home']"
+      (click)="cancelAbort()"
+    >
+      No
+    </ion-button>
+  </div>
 </ion-content>
-
-

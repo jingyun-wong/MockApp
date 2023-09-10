@@ -1,6 +1,6 @@
 <ion-header class="ion-padding">
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/trading-home']">
+    <ion-buttons slot="start" (click)="backButton()" [routerLink]="['/trading-home']">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-row>
@@ -58,13 +58,13 @@
   <div class="ion-padding"></div>
 
   <ion-segment value="buttons" [(ngModel)]="selectedDetail">
-    <ion-segment-button value="Order">
+    <ion-segment-button (click)="order()" value="Order">
       <ion-label>Order Data</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Execution">
+    <ion-segment-button (click)="execution()" value="Execution">
       <ion-label>Execution</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Settlement">
+    <ion-segment-button (click)="settlement()" value="Settlement">
       <ion-label>Settlement</ion-label>
     </ion-segment-button>
   </ion-segment>
