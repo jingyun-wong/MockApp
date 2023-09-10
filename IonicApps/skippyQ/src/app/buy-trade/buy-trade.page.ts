@@ -19,13 +19,18 @@ export class BuyTradePage implements OnInit {
   campaigns: Campaign[];
   campaignEmail:string;
   listData = [];
-  clicks = parseInt(localStorage.getItem("pageClicks"))
 
-  
-  startTime! : number;
-  initTime! : number;
-  contentInitTime! : number;
-  viewInitTime! : number;
+  clicks = 0
+
+  startTime! : number
+  initTime! : number
+  dbStartTime! : number
+  contentInitTime! : number
+  viewInitTime! : number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "buyTrade";
+
   taskstartTime! : number;
 
   constructor(public router: Router,private trackingService: TrackingService){
@@ -44,9 +49,13 @@ export class BuyTradePage implements OnInit {
 portfolioSelectionbtn(){
   this.clicks += 1
   localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+  this.trackingService.trackCTAMetrics(this.pageName, "button", "click on a specific portfilio", "buyTradeStock", 0);
+}
 
-
-
+backButton(){
+  this.clicks += 1
+  localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+  this.trackingService.trackCTAMetrics(this.pageName, "button", "click on back button", "tradingHome", 0);
 }
 
 }
