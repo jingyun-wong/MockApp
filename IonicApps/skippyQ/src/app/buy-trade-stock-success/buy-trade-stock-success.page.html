@@ -1,84 +1,87 @@
 <ion-header class="ion-padding">
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/buy-trade-stock']">
+    <ion-buttons
+      slot="start"
+      (click)="backButton()"
+      [routerLink]="['/buy-trade-stock']"
+    >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-row>
-    <ion-col>
-    <ion-title>Buy Order</ion-title>
-     Order Data
-    </ion-col>
+      <ion-col>
+        <ion-title>Buy Order</ion-title>
+        Order Data
+      </ion-col>
     </ion-row>
-    <br>
+    <br />
     <ion-progress-bar value="0.40"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding" style="justify-content: center">
   <ion-card color="danger">
-      <ion-item *ngFor="let error of errors">
-        {{error}}
-      </ion-item>
+    <ion-item *ngFor="let error of errors"> {{error}} </ion-item>
   </ion-card>
   <ion-card color="primary">
-
     <ion-label>
       <ion-col>
-      <ion-card-title>ABB N</ion-card-title>
-      <br>
-      <br><ion-card-subtitle color="medium">Bid {{bidPrice}} Ask {{askPrice}}</ion-card-subtitle>
-      <br><ion-card-subtitle color="medium">22.02.2018, 15:53 CT</ion-card-subtitle>
+        <ion-card-title>ABB N</ion-card-title>
+        <br />
+        <br /><ion-card-subtitle color="medium"
+          >Bid {{bidPrice}} Ask {{askPrice}}</ion-card-subtitle
+        >
+        <br /><ion-card-subtitle color="medium"
+          >22.02.2018, 15:53 CT</ion-card-subtitle
+        >
       </ion-col>
 
-        <div class="ion-text-end">
-          <ion-card-title>CHF {{price}}</ion-card-title>
-        </div>
-
+      <div class="ion-text-end">
+        <ion-card-title>CHF {{price}}</ion-card-title>
+      </div>
     </ion-label>
-
   </ion-card>
 
   <ion-card class="card-center">
-    <ion-card-content >
+    <ion-card-content>
       <ion-item>
-        <ion-input placeholder="Units" [(ngModel)]="units" ></ion-input>
-
-
-
+        <ion-input placeholder="Units" [(ngModel)]="units"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Trading Place" [(ngModel)]="tradingPlace"></ion-input>
+        <ion-input
+          placeholder="Trading Place"
+          [(ngModel)]="tradingPlace"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-select [(ngModel)]="selectOrder" placeholder="Order Type">
-          <ion-select-option *ngFor="let order of orderList" value={{order}}>{{order}}</ion-select-option>
-
+          <ion-select-option *ngFor="let order of orderList" value="{{order}}"
+            >{{order}}</ion-select-option
+          >
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Limit (optional)" [(ngModel)]="limit" ></ion-input>
+        <ion-input
+          placeholder="Limit (optional)"
+          [(ngModel)]="limit"
+        ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Trigger Limit" [(ngModel)]="triggerLimit" ></ion-input>
+        <ion-input
+          placeholder="Trigger Limit"
+          [(ngModel)]="triggerLimit"
+        ></ion-input>
       </ion-item>
     </ion-card-content>
-
-
   </ion-card>
-
 
   <ion-card>
     <ion-item>
       <ion-label>Valid From</ion-label>
-      <ion-datetime  [(ngModel)]="from"></ion-datetime>
-
-
+      <ion-datetime [(ngModel)]="from"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>To</ion-label>
-      <ion-datetime  [(ngModel)]="to"></ion-datetime>
-
+      <ion-datetime [(ngModel)]="to"></ion-datetime>
     </ion-item>
   </ion-card>
 
@@ -87,52 +90,28 @@
   </div>
   <ion-card class="ion-padding">
     <ion-card-header>
-    <ion-card-title>012345678901</ion-card-title>
-    <ion-card-subtitle>[Portfolio Name][Strategy]</ion-card-subtitle>
+      <ion-card-title>012345678901</ion-card-title>
+      <ion-card-subtitle>[Portfolio Name][Strategy]</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
-  <br>
+  <br />
 
   <ion-card class="ion-padding">
     <ion-card-header>
-    <ion-card-title>
-      012345678901
-    </ion-card-title>
-    <ion-card-subtitle>
-      [Cash Account Name]
-    </ion-card-subtitle>
-
-
-
+      <ion-card-title> 012345678901 </ion-card-title>
+      <ion-card-subtitle> [Cash Account Name] </ion-card-subtitle>
     </ion-card-header>
 
     <div class="ion-text-end">
       <ion-card-title>CHF {{accountAmount}}</ion-card-title>
-      <br>
-      <ion-button routerLink="['/buy-trade-stock']">
+      <br />
+      <ion-button>
         <ion-icon name="arrow-forward-circle-outline"></ion-icon>
       </ion-button>
-      <br>
-
+      <br />
     </div>
-
-
-
-
   </ion-card>
 
-  <ion-button expand="block" (click)="check()">
-    Next
-  </ion-button>
-
-
-
-
-
-
-
-
+  <ion-button expand="block" (click)="check()"> Next </ion-button>
 </ion-content>
-
-
