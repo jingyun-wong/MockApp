@@ -12,7 +12,7 @@
         <h4>{{userStory.key}}</h4>
       </ion-text>
     </ion-item-divider>
-    <ion-item *ngFor="let story of userStory.value" detail="true" (click)="toHomePage(story.name)" [routerLink]="['/home']">
+    <ion-item *ngFor="let story of userStory.value" detail="true" (click)="toHomePage(story.id, story.name)" [routerLink]="['/home']">
       <ion-label class="ion-text-wrap">
         <h3>{{story.name}}</h3>
         <p>{{story.desc}}</p>

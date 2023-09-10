@@ -42,10 +42,10 @@ export class UserStoriesPage implements OnInit {
     })
   }
 
-  toHomePage(userStoryName){
+  toHomePage(userStoryID, userStoryName){
     // set the idle period
     localStorage.clear();
-    this.trackingService.setUser(userStoryName);
+    this.trackingService.setUser(userStoryID, userStoryName);
     this.idle.setIdle(20);
     this.idle.setTimeout(20);
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);

@@ -36,7 +36,7 @@ export class InvestmentDetailsOilPage implements OnInit {
 
   ngOnInit() {
     this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)))
 
     this.activatedRoute.queryParams.subscribe(params => {
       this.investmentIdeaIndex = params["id"];
@@ -60,7 +60,7 @@ export class InvestmentDetailsOilPage implements OnInit {
             }
           }
 
-          if (localStorage.getItem("userStoryId") == "5"){
+          if (localStorage.getItem("userStoryID") == "5"){
             alert('You have completed this user story!');  
             this.trackingService.trackJourneyMetrics(window.performance.now());
             localStorage.clear();
