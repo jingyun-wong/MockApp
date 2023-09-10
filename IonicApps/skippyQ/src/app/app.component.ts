@@ -93,6 +93,6 @@ export class AppComponent {
 
   onTrading(){
     localStorage.setItem("pageClicks", JSON.stringify(1))
-    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on trading  at tabs", "tradingHome", 0);
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on trading at tabs", "tradingHome", 0);
   }
 }

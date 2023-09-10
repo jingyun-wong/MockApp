@@ -26,13 +26,16 @@ interface HttpInterceptor {
 })
 export class TradingHomePage implements OnInit {
 
-  clicks = parseInt(localStorage.getItem("pageClicks"))
+  clicks = 0
 
-  startTime!: number
-  initTime!: number
-  contentInitTime!: number
-  viewInitTime!: number
-  dbStartTime!: number
+  startTime! : number
+  initTime! : number
+  dbStartTime! : number
+  contentInitTime! : number
+  viewInitTime! : number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "tradingHome";
 
   orderStatus = "";
   item = [];
@@ -41,14 +44,12 @@ export class TradingHomePage implements OnInit {
   portfolioId = "";
   units = "";
   validity = "";
-  backEndErrors = 0;
 
 
 
   constructor(public http: HttpClient, public router: Router, private trackingService: TrackingService, private SqlService: SqlService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    console.log(this.startTime / 1000)
   }
 
 
@@ -59,8 +60,8 @@ export class TradingHomePage implements OnInit {
 
 
   ngOnInit() {
-
     this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime) / 1000))
     this.orderStatus = "pending"
 
 
@@ -82,9 +83,7 @@ export class TradingHomePage implements OnInit {
       this.backEndErrors += 1
       localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
     })
-
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
-    localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now() - parseFloat(localStorage.getItem("dbLoadTime"))))
+    localStorage.setItem("dbLoadTime",JSON.stringify(parseFloat(localStorage.getItem("dbLoadTime")) - this.initTime))
   }
 
 
@@ -94,6 +93,7 @@ export class TradingHomePage implements OnInit {
       this.clicks += 1
       localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
       console.log("In pending: ", this.clicks)
+      this.trackingService.trackCTAMetrics(this.pageName, "button", "click on pending filter", "view orderStatus = pending", 0);
     }
   }
 
@@ -102,6 +102,7 @@ export class TradingHomePage implements OnInit {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
     console.log("In executed: ", this.clicks)
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on executed filter", "view orderStatus = executed", 0);
   }
 
 
@@ -110,6 +111,7 @@ export class TradingHomePage implements OnInit {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
     console.log("In closed: ", this.clicks)
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on closed filter", "view orderStatus = closed", 0);
   }
 
   viewAll() {
@@ -118,17 +120,20 @@ export class TradingHomePage implements OnInit {
     this.clicks += 1
 
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on view all filter", "view orderStatus = all", 0);
   }
 
   buyRoute() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on buy", "buyTrade", 0);
   }
 
 
   sellRoute() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on sell", "sellTrade", 0);
   }
 
 
@@ -137,6 +142,7 @@ export class TradingHomePage implements OnInit {
     this.clicks += 1
 
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on specific trade", "tradeDetails", 0);
 
     this.router.navigate(['/trade-details',
       {

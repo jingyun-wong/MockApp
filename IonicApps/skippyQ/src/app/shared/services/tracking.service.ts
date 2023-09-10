@@ -262,6 +262,8 @@ export class TrackingService {
     localStorage.setItem("elapsedTime", JSON.stringify(0))
     localStorage.setItem("dbLoadTime", JSON.stringify(0))
     localStorage.setItem('pageLoadTime', JSON.stringify(0))
+    localStorage.setItem("timeSpentOnPage", JSON.stringify(0))
+    localStorage.setItem("startTime", JSON.stringify(0))
   }
 
   trackJourneyMetrics(finalTiming){
@@ -300,13 +302,12 @@ export class TrackingService {
       "pageNo": pageCount,
       "clicksOnPage": parseInt(localStorage.getItem("pageClicks")),
       "timeSpentOnPage": parseFloat(((window.performance.now() - parseFloat(localStorage.getItem("startTime"))) / 1000).toFixed(5)),
-      "elapsedTime": parseFloat(localStorage.getItem("elapsedTime")),
-      "loadTime": parseFloat(localStorage.getItem("pageLoadTime")),
-      "dbLoadTime": parseFloat(localStorage.getItem("dbLoadTime")),
+      "elapsedTime": parseFloat(localStorage.getItem("elapsedTime")) + parseFloat(((window.performance.now() - parseFloat(localStorage.getItem("startTime"))) / 1000).toFixed(5)),
+      "loadTime": (parseFloat(localStorage.getItem("pageLoadTime"))/1000).toFixed(5),
+      "dbLoadTime": (parseFloat(localStorage.getItem("dbLoadTime"))/1000).toFixed(5),
       "frontEndErrors": parseInt(localStorage.getItem("frontEndErrors")),
       "backEndErrors": parseInt(localStorage.getItem("backEndErrors")),
     }
-
     console.log(jsonbody)
 
     localStorage.setItem("pageClicks", JSON.stringify(0));
@@ -315,7 +316,7 @@ export class TrackingService {
     localStorage.setItem("pageCount", JSON.stringify(pageCount + 1))
     localStorage.setItem('dbLoadTime', JSON.stringify(0))
     localStorage.setItem('loadTime', JSON.stringify(0))
-    localStorage.setItem('elapsedTime', JSON.stringify(0))
+    localStorage.setItem('elapsedTime', JSON.stringify(parseFloat(localStorage.getItem("elapsedTime")) + parseFloat(((window.performance.now() - parseFloat(localStorage.getItem("startTime"))) / 1000).toFixed(5))))
 
     return jsonbody
   }
