@@ -34,7 +34,7 @@ export class InvestmentIdeasPage implements OnInit {
 
   ngOnInit() {
     this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime) / 1000))
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)))
 
     this.SqlService.getInvestmentIdeas().subscribe(result => {
       var jsonbody = result['Data']['recordset']

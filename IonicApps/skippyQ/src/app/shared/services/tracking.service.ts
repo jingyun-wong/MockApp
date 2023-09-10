@@ -9,6 +9,7 @@ import 'firebase/compat/database';
 import { filter, pairwise } from "rxjs/operators";
 import { url } from 'inspector';
 import { observable } from 'rxjs';
+import { domain } from 'process';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,11 @@ export class TrackingService {
       if (url == "/home"){
         pageName = "home"
         domainName = "home"  
+      }
+
+      else if (url == "/admin-dashboard"){
+        pageName = "position",
+        domainName = "home"
       }
 
       // view Trades task - eTrading
@@ -239,10 +245,11 @@ export class TrackingService {
   }
 
   // set a current session 
-  setUser(userStoryName) {
+  setUser(userStoryID, userStoryName) {
     // local storage can only handle strings
     // details of user stories
     localStorage.setItem("sessionId", JSON.stringify(this.makeid(28)));
+    localStorage.setItem("userStoryID", JSON.stringify(userStoryID));
     localStorage.setItem("userStoryName", JSON.stringify(userStoryName));
     localStorage.setItem("customerId", JSON.stringify(2295));
     localStorage.setItem("dateEntered", new Date().toISOString());
@@ -273,11 +280,11 @@ export class TrackingService {
 
     var jsonbody = {
       "sessionId": JSON.parse(localStorage.getItem("sessionId")),
-      "userStoryId": JSON.parse(localStorage.getItem("userStoryId")),
+      "userStoryId": JSON.parse(localStorage.getItem("userStoryID")),
       "totalClicks": JSON.parse(localStorage.getItem("totalClicks")),
-      "elapsedTime": (finalTiming - parseFloat(localStorage.getItem("journeyElapsedTime"))),
-      "totalLoadTime": JSON.parse(localStorage.getItem("totalLoadTime")),
-      "totalDBLoadTime": JSON.parse(localStorage.getItem("totalDBLoadTime")),
+      "elapsedTime": ((finalTiming - parseFloat(localStorage.getItem("journeyElapsedTime")))/1000).toFixed(5),
+      "totalLoadTime": (parseFloat(localStorage.getItem("totalLoadTime"))/1000).toFixed(5),
+      "totalDBLoadTime": (parseFloat(localStorage.getItem("totalDBLoadTime"))/1000).toFixed(5),
       "totalPageVisits": pageCount,
       "insertTimestamp": Date.now(),
       "frontendErrors": JSON.parse(localStorage.getItem("frontendErrors")),

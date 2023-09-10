@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
+import { TrackingService } from '../shared/services/tracking.service';
 
 
 @Component({
@@ -18,19 +19,35 @@ export class ListPage implements OnInit {
   initTime!: number;
   contentInitTime!: number;
   viewInitTime!: number;
+  pageName: string = "position"
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public trackingService: TrackingService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
+    localStorage.setItem("dbLoadTime", JSON.stringify(0))
 
   }
 
-  clickAnything() {
+  ngOnInit() {
+    this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
+  }
+
+  clickHome() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "back to home", "home", 0);
+  }
+
+  clickHC() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to healthcheck", "healthCheck", 0);
+  }
+
+  clickPosition() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to positions", "position", 0);
   }
 }
