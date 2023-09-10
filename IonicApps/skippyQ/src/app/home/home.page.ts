@@ -7,7 +7,6 @@ import { donationRecord } from '../shared/models/donationRecord';
 import { Campaign } from '../shared/models/campaign';
 import { TrackingService } from './../shared/services/tracking.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,22 +20,20 @@ export class HomePage implements OnInit {
   endingCampaigns: Campaign[];
   private actionId: number;
 
-  clicks = parseInt(localStorage.getItem("pageClicks"));
+  clicks = parseFloat(localStorage.getItem("pageClicks"));
   startTime!: number;
   initTime!: number;
   contentInitTime!: number;
   viewInitTime!: number;
+  pageName!: string;
 
-  constructor(
-    private loadingCtrl: LoadingController,
-    private router: Router,
-    private trackingService: TrackingService,
-  ) {
+  constructor(private trackingService: TrackingService,) {
     this.startTime = window.performance.now()
+    this.pageName = "home"
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    // console.log(this.startTime/1000)
-
+    localStorage.setItem("dbLoadTime", JSON.stringify(0))
   }
+
   // when the directive is instantiated.
   ngOnInit() {
     this.initTime = window.performance.now()
@@ -45,16 +42,19 @@ export class HomePage implements OnInit {
 
   myManage() {
     this.clicks += 1
-    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks));
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Manage at homepage", "My Manage", 0);
   }
+  
   myAdvice() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Advice at homepage", "My Advice", 0);
   }
+
   myTradingPortfolio() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Trading Porfolio at homepage", "My Trading Portfolio", 0);
   }
-
 }

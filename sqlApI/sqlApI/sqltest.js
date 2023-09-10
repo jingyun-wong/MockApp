@@ -83,10 +83,6 @@ app.post('/add/trackingMetrics', function (req, res) {
         // create Request object
         var request = new sql.Request();
 
-
-
-
-
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[trackingMetrics]
         VALUES('${sessionId}',${customerId},${pageNo},'${pageName}','${domainName}',${clicks},${renderDuration},${elapsedDuration},${dbLoadTime},${frontEndErrors},${backEndErrors},'${dateEntered}')`, function (err, results, fields) {
@@ -138,8 +134,6 @@ app.get('/get/trading', function (req, res) {
     var sql = require("mssql");
 
     // config for your database
-
-
 
     // connect to your database
     sql.connect(config, function (err) {
@@ -350,9 +344,6 @@ app.post('/add/investmentIdeas', function (req, res) {
 
     var sql = require("mssql");
 
-
-
-
     // connect to your database
     sql.connect(config, function (err) {
 
@@ -361,11 +352,6 @@ app.post('/add/investmentIdeas', function (req, res) {
 
         // create Request object
         var request = new sql.Request();
-
-
-
-
-
 
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[investmentIdeas]
@@ -391,6 +377,168 @@ app.post('/add/investmentIdeas', function (req, res) {
         });
     });
 });
+
+app.post('/add/journeytrackingMetrics', function (req, res) {
+
+    console.log(req.body)
+
+    var sql = require("mssql");
+
+    var sessionId = req.body.sessionId
+    var userStoryId = req.body.userStoryId
+    var totalClicks = req.body.totalClicks
+    var elapsedTime = req.body.elapsedTime
+    var totalLoadTime = req.body.totalLoadTime
+    var totalDBLoadTime = req.body.totalDBLoadTime
+    var totalPageVisits = req.body.totalPageVisits
+    var insertTimestamp = new Date().toISOString().split('.')[0]
+    var frontendErrors = 0
+    var backendErrors = 0
+
+    // connect to your database
+    sql.connect(config, function (err) {
+
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+
+        // query to the database and get the records
+        request.query(`INSERT INTO [dbo].[overallJourneyMetrics]
+        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}')`, function (err, results, fields) {
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully inserted new row of data"
+            });
+
+        });
+    });
+});
+
+app.post('/add/pagetrackingMetrics', function (req, res) {
+
+    console.log(req.body)
+
+    var sql = require("mssql");
+
+    var sessionId = req.body.sessionId
+    var userStoryId = req.body.userStoryId
+    var totalClicks = req.body.totalClicks
+    var elapsedTime = req.body.elapsedTime
+    var totalLoadTime = req.body.totalLoadTime
+    var totalDBLoadTime = req.body.totalDBLoadTime
+    var totalPageVisits = req.body.totalPageVisits
+    var insertTimestamp = new Date().toISOString().split('.')[0]
+    var frontendErrors = 0
+    var backendErrors = 0
+
+    // connect to your database
+    sql.connect(config, function (err) {
+
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+
+        // query to the database and get the records
+        request.query(`INSERT INTO [dbo].[overallJourneyMetrics]
+        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}')`, function (err, results, fields) {
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully inserted new row of data"
+            });
+
+        });
+    });
+});
+
+app.post('/add/generaltrackingMetrics', function (req, res) {
+
+    console.log(req.body)
+
+    var sql = require("mssql");
+
+    var sessionId = req.body.sessionID
+    var pageNo = req.body.pageNo
+    var pageName = req.body.pageName
+    var journeyName = req.body.journeyName
+    var clicksOnPage = req.body.clicksOnPage
+    var timeSpentOnPage = parseFloat(req.body.timeSpentOnPage)
+    var elapsedTime = parseFloat(req.body.elapsedTime)
+    var loadTime = parseFloat(req.body.loadTime)
+    var dbLoadTime = parseFloat(req.body.dbLoadTime)
+    var insertTimestamp = new Date().toISOString().split('.')[0]
+
+    // connect to your database
+    sql.connect(config, function (err) {
+
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+
+        // query to the database and get the records
+        request.query(`INSERT INTO [dbo].[generalMetrics]
+        VALUES('${sessionId}','${pageNo}','${pageName}','${journeyName}','${clicksOnPage}','${timeSpentOnPage}','${elapsedTime}','${loadTime}','${dbLoadTime}','${insertTimestamp}')`, 
+        function (err, results, fields) {
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully inserted new row of data"
+            });
+
+        });
+    });
+});
+
+app.post('/add/ctrTrackingMetrics', function (req, res) {
+
+    console.log(req.body)
+
+    var sql = require("mssql");
+
+    var sessionId = req.body.sessionID
+    var pageName = req.body.pageName
+    var ctaType = req.body.ctaType
+    var ctaName = req.body.ctaName
+    var ctaDestination = req.body.ctaDestination
+    var ctaTimeTaken = req.body.ctaTimeTaken
+    var insertTimestamp = new Date().toISOString().split('.')[0]
+
+    // connect to your database
+    sql.connect(config, function (err) {
+
+        if (err) console.log(err);
+
+        // create Request object
+        var request = new sql.Request();
+
+        // query to the database and get the records
+        request.query(`INSERT INTO [dbo].[ctrMetrics1]
+        (sessionID, pageName, ctaType, ctaName, ctaDestination, ctaTimeTaken, insertTimestamp)
+        VALUES('${sessionId}','${pageName}','${ctaType}','${ctaName}','${ctaDestination}','${ctaTimeTaken}', '${insertTimestamp}')`, 
+        function (err, results, fields) {
+            if (err) res.send(err)
+
+            // send records as a response
+            else res.send({
+                'status code': 200,
+                'message': "Successfully inserted new row of data"
+            });
+
+        });
+    });
+});
+
+
 
 
 

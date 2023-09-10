@@ -4,7 +4,8 @@ import { TrackingService } from './../shared/services/tracking.service';
 import { SqlService } from '../shared/services/sqldb.service';
 import { investment } from '../shared/models/investment';
 import { tradingIdea } from '../shared/models/trading-idea';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-list',
   templateUrl: 'investment-details-oil.page.html',
@@ -26,8 +27,9 @@ export class InvestmentDetailsOilPage implements OnInit {
   contentInitTime! : number;
   viewInitTime! : number;
   backEndErrors = 0;
+  pageName: string = 'investmentDetails'
 
-  constructor(private SqlService: SqlService, public activatedRoute: ActivatedRoute) {
+  constructor(private SqlService: SqlService, public activatedRoute: ActivatedRoute, public trackingService: TrackingService, public router: Router) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
   }
@@ -57,6 +59,13 @@ export class InvestmentDetailsOilPage implements OnInit {
               chosenList.push(idx)
             }
           }
+
+          if (localStorage.getItem("userStoryId") == "5"){
+            alert('You have completed this user story!');  
+            this.trackingService.trackJourneyMetrics(window.performance.now());
+            localStorage.clear();
+            this.router.navigate(['/user-stories'])
+          }
       
         }, error => {
           this.backEndErrors += 1
@@ -81,18 +90,20 @@ export class InvestmentDetailsOilPage implements OnInit {
     }); 
   }
 
-
   financeNewRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII finance tags", "financeNews", 0);
   }
   tradingIdeaRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII trading ideas", "investmentTradingIdea", 0);
   }
   backRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "back to DII investment Ideas page", "investmentIdeas", 0);
   }
 }
 

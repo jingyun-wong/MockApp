@@ -12,7 +12,6 @@ import { TrackingService } from '../shared/services/tracking.service';
   styleUrls: ['user-stories.page.scss']
 })
 
-
 export class UserStoriesPage implements OnInit {
 
   userStories: {[key:string]: userStories[]} = {};
@@ -23,9 +22,7 @@ export class UserStoriesPage implements OnInit {
     private platform: Platform,
     private router: Router,
     private trackingService: TrackingService,
-  ){
-
-  }
+  ){}
 
   ngOnInit() {
     this.SqlService.getUserStories().subscribe(result => {
@@ -45,8 +42,10 @@ export class UserStoriesPage implements OnInit {
     })
   }
 
-  toHomePage(){
+  toHomePage(userStoryName){
     // set the idle period
+    localStorage.clear();
+    this.trackingService.setUser(userStoryName);
     this.idle.setIdle(20);
     this.idle.setTimeout(20);
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
@@ -69,7 +68,6 @@ export class UserStoriesPage implements OnInit {
     this.platform.ready().then(async () => {
       this.router.navigate(['/user-stories'])
       localStorage.clear()
-      this.trackingService.setUser();
     });
   }
 }

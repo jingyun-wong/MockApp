@@ -3,6 +3,7 @@ import { Campaign } from '../shared/models/campaign';
 import { investment } from '../shared/models/investment';
 import { Router, RouterEvent, NavigationEnd, RoutesRecognized} from '@angular/router';
 import {SqlService} from '../shared/services/sqldb.service'
+import { TrackingService } from '../shared/services/tracking.service';
 
 
 @Component({
@@ -23,58 +24,54 @@ export class InvestmentIdeasPage implements OnInit {
   contentInitTime! : number
   viewInitTime! : number
   dbloadTime!: number
-  backEndErrors =0;
+  backEndErrors = 0;
+  pageName: string = "investmentIdeas";
 
-  constructor(private SqlService :SqlService) {
+  constructor(private SqlService :SqlService, public trackingService: TrackingService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
   }
 
   ngOnInit() {
+    this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime) / 1000))
 
-  this.initTime = window.performance.now()
-  this.SqlService.getInvestmentIdeas().subscribe(result => {
-    var jsonbody = result['Data']['recordset']
-    for (var i = 0; i < jsonbody.length; i++){
-      console.log(jsonbody[i])
-      var newInvestment = new investment(jsonbody[i]['id'],jsonbody[i]['category'],jsonbody[i]['img'],jsonbody[i]['post'],jsonbody[i]['title'],jsonbody[i]['details'])
-      if (newInvestment.category in this.allInvestment){
-        this.allInvestment[newInvestment.category].push(newInvestment)
+    this.SqlService.getInvestmentIdeas().subscribe(result => {
+      var jsonbody = result['Data']['recordset']
+      for (var i = 0; i < jsonbody.length; i++){
+        console.log(jsonbody[i])
+        var newInvestment = new investment(jsonbody[i]['id'],jsonbody[i]['category'],jsonbody[i]['img'],jsonbody[i]['post'],jsonbody[i]['title'],jsonbody[i]['details'])
+        if (newInvestment.category in this.allInvestment){
+          this.allInvestment[newInvestment.category].push(newInvestment)
+        }
+        else{
+          this.allInvestment[newInvestment.category] = [newInvestment]
+        }
       }
-      else{
-        this.allInvestment[newInvestment.category] = [newInvestment]
+
+      for ( let topic in this.allInvestment ){
+        var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
+        this.investment.push(this.allInvestment[topic][random])
       }
-    }
 
-    for ( let topic in this.allInvestment ){
-      var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
-      this.investment.push(this.allInvestment[topic][random])
-    }
+      for ( let topic in this.allInvestment ){
+        var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
+        this.mostRead.push(this.allInvestment[topic][random])
+      }
 
-    for ( let topic in this.allInvestment ){
-      var random = Math.floor(Math.random() * this.allInvestment['sustainability'].length)
-      this.mostRead.push(this.allInvestment[topic][random])
-    }
+      localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now()))
+    }, error => {
+      this.backEndErrors += 1
+      localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
+      console.log(error)
+    })
 
-  }, error => {
-    this.backEndErrors += 1
-    localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
-    console.log(error)
-    
-  })
-
-  localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
-  localStorage.setItem("dbLoadTime",JSON.stringify(window.performance.now()-parseFloat(localStorage.getItem("dbLoadTime"))))
-  
+    localStorage.setItem("dbLoadTime",JSON.stringify(parseFloat(localStorage.getItem("dbLoadTime")) - this.initTime))
   }
 
   investmentDetails(){
       this.clicks += 1
-      localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+      localStorage.setItem("pageClicks", JSON.stringify(this.clicks));
+      this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII Article", "investmentDetails", 0);
   }
-
-
-
-
-
 }

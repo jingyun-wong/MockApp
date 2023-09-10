@@ -24,12 +24,10 @@ import { key } from 'localforage';
 })
 export class AppComponent {
   rootPage:any = 'HomePage';
-
   idleState = 'Not started.';
   timedOut = false;
-
   abandoned = [];
-
+  pageName: string = "tabs"
 
   public adminPages = [
     {
@@ -73,5 +71,28 @@ export class AppComponent {
     localStorage.clear()
   }
 
+  onHome(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Homepage at tabs", "home", 0);
+  }
 
+  onAssets(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Assets at tabs", "assets", 0);
+  }
+
+  onAccounts(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Accounts at tabs", "accounts", 0);
+  }
+
+  onDII(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on DII at tabs", "investmentIdeas", 0);
+  }
+
+  onTrading(){
+    localStorage.setItem("pageClicks", JSON.stringify(1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on trading  at tabs", "tradingHome", 0);
+  }
 }
