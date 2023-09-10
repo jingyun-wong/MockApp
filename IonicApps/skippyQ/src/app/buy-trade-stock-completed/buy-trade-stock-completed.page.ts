@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import {DataService} from '../services/data.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TrackingService } from './../shared/services/tracking.service';
 
 @Component({
@@ -27,28 +27,33 @@ export class BuyTradeStockCompletedPage implements OnInit {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
   }
-  ngOnInit() {
+  ngOnInit(): void {
     this.initTime = window.performance.now()
     localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
-
-    if (JSON.parse(localStorage.getItem("userStoryName")) == "Successfully place market order " && JSON.parse(localStorage.getItem("selectOrder")) == "Market Order") {
-      setTimeout(() => {
-        alert('You have completed this user story!');
-        localStorage.clear();
-        this.trackingService.trackJourneyMetrics(window.performance.now());
-        location.reload();
-        this.router.navigate(['/user-stories'])
-      }, 200);
-    }
-    if (JSON.parse(localStorage.getItem("userStoryName")) == "Successfully places a limit market order " && JSON.parse(localStorage.getItem("selectOrder")) == "Limit Order") {
-      setTimeout(() => {
-        alert('You have completed this user story!');
-        localStorage.clear();
-        this.trackingService.trackJourneyMetrics(window.performance.now());
-        location.reload();
-        this.router.navigate(['/user-stories'])
-      }, 200);
-    }
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (this.router.url === '/buy-trade-stock-completed') {
+          if (localStorage.getItem("userStoryID") == "4" && JSON.parse(localStorage.getItem("selectOrder")) == "Market Order") {
+            setTimeout(() => {
+              alert('You have completed this user story!');
+              this.trackingService.trackJourneyMetrics(window.performance.now());
+              localStorage.clear();
+              location.reload();
+              this.router.navigate(['/user-stories'])
+            }, 200);
+          }
+          if (localStorage.getItem("userStoryID") == "12" && JSON.parse(localStorage.getItem("selectOrder")) == "Limit Order") {
+            setTimeout(() => {
+              alert('You have completed this user story!');
+              this.trackingService.trackJourneyMetrics(window.performance.now());
+              localStorage.clear();
+              location.reload();
+              this.router.navigate(['/user-stories'])
+            }, 200);
+          }
+        }
+      }
+    });
   }
 
   crossButton() {
