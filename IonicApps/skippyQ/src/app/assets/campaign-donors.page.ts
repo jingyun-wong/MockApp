@@ -15,6 +15,8 @@ export class CampaignDonorsPage implements OnInit {
   roleMessage = '';
   startTime! : number;
   initTime! : number;
+  clicks: number = 0;
+  pageName: string = 'assets'
 
   constructor(private alertController: AlertController, public trackingService: TrackingService, public router: Router) {
     this.startTime = window.performance.now()
@@ -34,6 +36,24 @@ export class CampaignDonorsPage implements OnInit {
         this.router.navigate(['/user-stories'])}
       ,200)
     }
+  }
+
+  goMyAdvice(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to My Advice", "myAdvice", 0);
+  }
+
+  goMyWay(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to My Way Porfolio", "ubsManage-myway", 0);
+  }
+
+  goMyManage(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to My Manage Porfolio", "ubsManage-myManage", 0);
   }
 
   async presentAlert() {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Campaign } from '../shared/models/campaign';
 import { ConfirmationModalPage } from '../confirmation-modal/confirmation-modal.page';
 import { ModalController } from '@ionic/angular';
+import { TrackingService } from '../shared/services/tracking.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -37,13 +39,11 @@ viewInitTime! : number
 dbStartTime! : number
 clicks = parseInt(localStorage.getItem("pageClicks"))
 type: string;
+pageName: string = "ubsManage"
 
-
-
-  constructor(private modalController: ModalController) {
+  constructor(private modalController: ModalController, public trackingService: TrackingService, public router: Router) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    console.log(this.startTime/1000)
     this.type = window.location.href.split('/')[4];
   }
 
@@ -51,27 +51,50 @@ type: string;
     this.initTime = window.performance.now()
     localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)/1000))
 
-
+    if (localStorage.getItem("userStoryID") == "17"){
+      this.trackingService.trackJourneyMetrics(window.performance.now());
+      setTimeout(() => {
+        alert("You have completed the user story!") ;   
+        localStorage.clear();
+        location.reload();
+        this.router.navigate(['/user-stories'])}
+      ,500)
+    }
   }
 
   async openPDF(){
+    this.clicks +=1
+    localStorage.setItem("totalClicks",JSON.stringify(parseInt(localStorage.getItem("totalClicks")) +  1))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to download report", "null", 0);
+
     const modal = await this.modalController.create({
       component: ConfirmationModalPage,
       componentProps: {
         message: "Report Downloaded"
       }
     })
-    return await modal.present();
+
+    if (localStorage.getItem("userStoryID") == "6"){
+      this.trackingService.trackJourneyMetrics(window.performance.now());
+      setTimeout(() => {
+        alert("You have completed the user story!") ;   
+        localStorage.clear();
+        location.reload();
+        this.router.navigate(['/user-stories'])}
+      ,500)
+    }
+    return await modal.present();    
   }
 
   routeEditorials(){
     this.clicks +=1
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
-    
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on editorial", "null", 0);
   }
   routeHome(){
     this.clicks +=1
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "back to home", "home", 0);
   }
 
 }
