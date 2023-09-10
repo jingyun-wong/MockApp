@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import {DataService} from '../services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
-
+import { TrackingService } from './../shared/services/tracking.service';
 
 @Component({
   selector: 'app-list',
@@ -24,19 +22,20 @@ export class TradeDetailsPage implements OnInit {
   bidPrice = 76.54;
   selectedDetail = "Order";
 
-  clicks = parseInt(localStorage.getItem("pageClicks"))
+  clicks = 0
+
   startTime!: number
   initTime!: number
+  dbStartTime!: number
   contentInitTime!: number
   viewInitTime!: number
-  dbStartTime!: number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "tradeDetails";
 
-
-  constructor(public route: ActivatedRoute, public router: Router) {
+  constructor(public route: ActivatedRoute, public router: Router, private trackingService: TrackingService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    console.log(this.startTime / 1000)
-
   }
 
   units = this.route.snapshot.paramMap.get("units")
@@ -97,27 +96,47 @@ export class TradeDetailsPage implements OnInit {
 
 
   ngOnInit() {
-
     this.selectedDetail = "Order"
     this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
-
-
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
   }
-  orderOverview() {
-    this.router.navigate(['/trading-home'])
+
+  order() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on order filter", "view orderDetails = order", 0);
+  }
 
+  execution() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on execution filter", "view orderDetails = execution", 0);
+  }
+
+  settlement() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on order settlement", "view orderDetails = settlement", 0);
+  }
+
+  backButton() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on back button", "tradingHome", 0);
+  }
+
+  orderOverview() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on order overview button", "tradingHome", 0);
+    this.router.navigate(['/trading-home'])
   }
   cancel() {
-
-    this.router.navigate(['/request-cancel-order'])
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on cancel button", "requestCancelOrder", 0);
+    this.router.navigate(['/request-cancel-order'])
   }
-
 }
 
 

@@ -39,7 +39,7 @@ export class BuyTradeStockPage implements OnInit {
 
   ngOnInit() {
     this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
   }
 
   backButton() {

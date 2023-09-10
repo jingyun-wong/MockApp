@@ -1,49 +1,33 @@
 <ion-header class="ion-padding">
   <ion-toolbar>
     <ion-row>
-    <ion-col>
-    <ion-title>Sell Order</ion-title>
-     Order Review
-    </ion-col>
-    <ion-button [routerLink]="['/trading-home']">
-      <ion-icon name="close-outline"></ion-icon>
-    </ion-button>
+      <ion-col>
+        <ion-title>Sell Order</ion-title>
+        Order Review
+      </ion-col>
+      <ion-button (click)="crossButton()" [routerLink]="['/trading-home']">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
     </ion-row>
-    <br>
+    <br />
     <ion-progress-bar value="0.60"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding" style="justify-content: center">
   <div class="ion-text-center">
-  <ion-icon size="large" name="checkmark-circle-outline"></ion-icon>
-  <br>
-  <br>
-  <br>
-  <ion-text>Order Submitted</ion-text>
-  <br>
-  <br>
-  <br>
-  <ion-text>Your sell order no.123456789 has been submitted on {{today}}</ion-text>
+    <ion-icon size="large" name="checkmark-circle-outline"></ion-icon>
+    <br />
+    <br />
+    <br />
+    <ion-text>Order Submitted</ion-text>
+    <br />
+    <br />
+    <br />
+    <ion-text
+      >Your sell order no.123456789 has been submitted on {{today}}</ion-text
+    >
 
-
-
-
-
-  <ion-button expand="block" (click)="newOrder()" >
-    New Order
-  </ion-button>
-
+    <ion-button expand="block" (click)="newOrder()"> New Order </ion-button>
   </div>
-
-
-
-
-
-
-
-
 </ion-content>
-
-
