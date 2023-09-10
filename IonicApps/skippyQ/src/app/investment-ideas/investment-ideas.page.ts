@@ -3,6 +3,7 @@ import { Campaign } from '../shared/models/campaign';
 import { investment } from '../shared/models/investment';
 import { Router, RouterEvent, NavigationEnd, RoutesRecognized} from '@angular/router';
 import {SqlService} from '../shared/services/sqldb.service'
+import { TrackingService } from '../shared/services/tracking.service';
 
 
 @Component({
@@ -23,9 +24,10 @@ export class InvestmentIdeasPage implements OnInit {
   contentInitTime! : number
   viewInitTime! : number
   dbloadTime!: number
-  backEndErrors =0;
+  backEndErrors = 0;
+  pageName: string = "investmentIdeas";
 
-  constructor(private SqlService :SqlService) {
+  constructor(private SqlService :SqlService, public trackingService: TrackingService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
   }
@@ -69,6 +71,7 @@ export class InvestmentIdeasPage implements OnInit {
 
   investmentDetails(){
       this.clicks += 1
-      localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+      localStorage.setItem("pageClicks", JSON.stringify(this.clicks));
+      this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII Article", "investmentDetails", 0);
   }
 }
