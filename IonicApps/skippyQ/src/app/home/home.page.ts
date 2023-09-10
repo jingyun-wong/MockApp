@@ -25,9 +25,11 @@ export class HomePage implements OnInit {
   initTime!: number;
   contentInitTime!: number;
   viewInitTime!: number;
+  pageName!: string;
 
   constructor(private trackingService: TrackingService,) {
     this.startTime = window.performance.now()
+    this.pageName = "home"
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
     localStorage.setItem("dbLoadTime", JSON.stringify(0))
   }
@@ -40,16 +42,19 @@ export class HomePage implements OnInit {
 
   myManage() {
     this.clicks += 1
-    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks));
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Manage at homepage", "My Manage", 0);
   }
   
   myAdvice() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Advice at homepage", "My Advice", 0);
   }
 
   myTradingPortfolio() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on My Trading Porfolio at homepage", "My Trading Portfolio", 0);
   }
 }

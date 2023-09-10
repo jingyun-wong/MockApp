@@ -60,4 +60,26 @@ constructor(private http: HttpClient) {
             data => console.log('Success',data), 
             error => console.log('Error',error))
     }
+
+    // post Journey trackingMetrcis
+    postJourneyTrackingMetrics(jsonbody){
+        return this.http.post('http://localhost:2345/add/journeytrackingMetrics',jsonbody).subscribe(
+            data => console.log('Success',data), 
+            error => console.log('Error',error))
+    }
+
+    // post General trackingMetrcis
+    postGeneralTrackingMetrics(jsonbody){
+        return this.http.post('http://localhost:2345/add/generaltrackingMetrics',jsonbody).subscribe(
+            data => console.log('Success',data), 
+            error => console.log('Error',error))
+    }
+
+    // post CTR trackingMetrics
+    postCTRTrackingMetrics(jsonbody){
+        console.log("CTR", jsonbody)
+        return this.http.post('http://localhost:2345/add/ctrTrackingMetrics',jsonbody).subscribe(
+            data => console.log('Success',data), 
+            error => console.log('Error',error))
+    }
 }

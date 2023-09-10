@@ -221,7 +221,7 @@ export class TrackingService {
         domainName = "Health Check"
       }
 
-      this.SqlService.postTrackingMetrics(this.trackPageMetrics(pageName, domainName))
+      this.SqlService.postGeneralTrackingMetrics(this.trackPageMetrics(pageName, domainName))
     });
 
   }
@@ -239,11 +239,11 @@ export class TrackingService {
   }
 
   // set a current session 
-  setUser(userStoryId) {
+  setUser(userStoryName) {
     // local storage can only handle strings
     // details of user stories
     localStorage.setItem("sessionId", JSON.stringify(this.makeid(28)));
-    localStorage.setItem("userStoryId", JSON.stringify(userStoryId));
+    localStorage.setItem("userStoryName", JSON.stringify(userStoryName));
     localStorage.setItem("customerId", JSON.stringify(2295));
     localStorage.setItem("dateEntered", new Date().toISOString());
     // pages
@@ -283,6 +283,8 @@ export class TrackingService {
     }
 
     console.log(jsonbody)
+
+    this.SqlService.postJourneyTrackingMetrics(jsonbody);
   }
 
   trackPageMetrics(pageName, domainName) {
@@ -290,18 +292,19 @@ export class TrackingService {
     var pageCount = parseInt(localStorage.getItem("pageCount"))
 
     var jsonbody = {
-      "sessionId": JSON.parse(localStorage.getItem("sessionId")),
-      "userStoryId": JSON.parse(localStorage.getItem("userStoryId")),
+      "sessionID": JSON.parse(localStorage.getItem("sessionId")),
+      "journeyName": JSON.parse(localStorage.getItem("userStoryName")),
       "customerId": JSON.parse(localStorage.getItem("customerId")),
       "domainName": domainName,
       "pageName": pageName,
       "pageNo": pageCount,
-      "clicks": parseInt(localStorage.getItem("pageClicks")),
-      "elapsedDuration": Number(((window.performance.now() - parseFloat(localStorage.getItem("startTime"))) / 1000).toFixed(5)),
-      "dbLoadTime": Number(((parseFloat(localStorage.getItem("dbLoadTime")) / 1000)).toFixed(5)),
+      "clicksOnPage": parseInt(localStorage.getItem("pageClicks")),
+      "timeSpentOnPage": parseFloat(((window.performance.now() - parseFloat(localStorage.getItem("startTime"))) / 1000).toFixed(5)),
+      "elapsedTime": parseFloat(localStorage.getItem("elapsedTime")),
+      "loadTime": parseFloat(localStorage.getItem("pageLoadTime")),
+      "dbLoadTime": parseFloat(localStorage.getItem("dbLoadTime")),
       "frontEndErrors": parseInt(localStorage.getItem("frontEndErrors")),
       "backEndErrors": parseInt(localStorage.getItem("backEndErrors")),
-      "renderDuration": Number(parseFloat(localStorage.getItem("pageLoadTime")).toFixed(5))
     }
 
     console.log(jsonbody)
@@ -311,8 +314,28 @@ export class TrackingService {
     localStorage.setItem("backEndErrors", JSON.stringify(0))
     localStorage.setItem("pageCount", JSON.stringify(pageCount + 1))
     localStorage.setItem('dbLoadTime', JSON.stringify(0))
+    localStorage.setItem('loadTime', JSON.stringify(0))
+    localStorage.setItem('elapsedTime', JSON.stringify(0))
 
     return jsonbody
+  }
+
+  trackCTAMetrics(pageName, ctaType, ctaName, ctaDestination, ctaTimeTaken){
+
+    console.log(localStorage.getItem("sessionId"))
+
+    var jsonbody = {
+      "sessionID": JSON.parse(localStorage.getItem("sessionId")),
+      "pageName": pageName,
+      "ctaType": ctaType,
+      "ctaName": ctaName,
+      "ctaDestination": ctaDestination,
+      "ctaTimeTaken": ctaTimeTaken,
+    }
+
+    console.log(jsonbody)
+
+    this.SqlService.postCTRTrackingMetrics(jsonbody)
   }
 
 }

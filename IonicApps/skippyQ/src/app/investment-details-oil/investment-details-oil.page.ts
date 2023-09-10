@@ -5,6 +5,7 @@ import { SqlService } from '../shared/services/sqldb.service';
 import { investment } from '../shared/models/investment';
 import { tradingIdea } from '../shared/models/trading-idea';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-list',
   templateUrl: 'investment-details-oil.page.html',
@@ -26,6 +27,7 @@ export class InvestmentDetailsOilPage implements OnInit {
   contentInitTime! : number;
   viewInitTime! : number;
   backEndErrors = 0;
+  pageName: string = 'investmentDetails'
 
   constructor(private SqlService: SqlService, public activatedRoute: ActivatedRoute, public trackingService: TrackingService, public router: Router) {
     this.startTime = window.performance.now()
@@ -91,14 +93,17 @@ export class InvestmentDetailsOilPage implements OnInit {
   financeNewRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII finance tags", "financeNews", 0);
   }
   tradingIdeaRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII trading ideas", "investmentTradingIdea", 0);
   }
   backRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "back to DII investment Ideas page", "investmentIdeas", 0);
   }
 }
 
