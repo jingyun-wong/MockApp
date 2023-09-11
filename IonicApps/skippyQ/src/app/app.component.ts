@@ -4,13 +4,13 @@ import { Platform, MenuController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 
-import {filter} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
 
-import {Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
+import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { FrontEnd } from './shared/models/front-end';
 import { TrackingService } from './shared/services/tracking.service';
 
@@ -23,7 +23,7 @@ import { key } from 'localforage';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  rootPage:any = 'HomePage';
+  rootPage: any = 'HomePage';
   idleState = 'Not started.';
   timedOut = false;
   abandoned = [];
@@ -33,12 +33,12 @@ export class AppComponent {
     {
       title: 'Dashboard',
       url: '/admin-dashboard',
-      icon:'home'
+      icon: 'home'
     },
     {
       title: 'Charity Org List',
       url: '/admin',
-      icon:'list'
+      icon: 'list'
     }
   ];
 
@@ -48,14 +48,14 @@ export class AppComponent {
     private menuController: MenuController,
     private idle: Idle,
     private trackingService: TrackingService,
-    private SqlService : SqlService,
+    private SqlService: SqlService,
   ) {
     this.initializeApp();
 
-     // when user place the app in the background
+    // when user place the app in the background
     this.platform.pause.subscribe(async () => {
-          alert('Pause event detected');
-    }); 
+      alert('Pause event detected');
+    });
   }
 
   initializeApp() {
@@ -65,33 +65,34 @@ export class AppComponent {
     });
   }
 
-  endStory(){
-    alert('You have chose to end this user story testing'); 
-    this.router.navigate(['/user-stories'])
+  endStory() {
+    alert('You have chose to end this user story testing');
     localStorage.clear()
+    location.reload();
+    this.router.navigate(['/user-stories'])
   }
 
-  onHome(){
+  onHome() {
     localStorage.setItem("pageClicks", JSON.stringify(1))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Homepage at tabs", "home", 0);
   }
 
-  onAssets(){
+  onAssets() {
     localStorage.setItem("pageClicks", JSON.stringify(1))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Assets at tabs", "assets", 0);
   }
 
-  onAccounts(){
+  onAccounts() {
     localStorage.setItem("pageClicks", JSON.stringify(1))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click on Accounts at tabs", "accounts", 0);
   }
 
-  onDII(){
+  onDII() {
     localStorage.setItem("pageClicks", JSON.stringify(1))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click on DII at tabs", "investmentIdeas", 0);
   }
 
-  onTrading(){
+  onTrading() {
     localStorage.setItem("pageClicks", JSON.stringify(1))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click on trading at tabs", "tradingHome", 0);
   }
