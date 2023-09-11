@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons
       slot="start"
-      (click)="clickAnything()"
+      (click)="backButton()"
       [routerLink]="['/improve-quality-review']"
     >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
@@ -104,7 +104,7 @@
         </ion-col>
         <ion-col>
           <ion-toggle
-            (click)="clickAnything()"
+            (click)="clickToggle()"
             [(ngModel)]="toggleState"
           ></ion-toggle>
         </ion-col>
@@ -127,9 +127,11 @@
     expand="block"
     color="success"
     [disabled]="!toggleState"
-    (click)="clickAnything()"
+    (click)="transmitOrders()"
     [routerLink]="['/improve-quality-success']"
     >Transmit orders</ion-button
   ><br />
-  <ion-button expand="block" color="light">Contact client advisor</ion-button>
+  <ion-button expand="block" color="light" (click)="clientAdvisor()"
+    >Contact client advisor</ion-button
+  >
 </ion-content>

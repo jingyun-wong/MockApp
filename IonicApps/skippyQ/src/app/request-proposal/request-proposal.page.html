@@ -26,8 +26,8 @@
       critical, please call them directly</ion-text
     >
     <br />
-    <ion-text color="primary">Contact Client Advisor</ion-text>
-    <ion-button color="light" expand="block" (click)="clickAnything()" [routerLink]="['/health-check']">
+    <ion-text color="primary" (click)="clientAdvisor()">Contact Client Advisor</ion-text>
+    <ion-button color="light" expand="block" (click)="backButton()" [routerLink]="['/health-check']">
       Back to portfolio
     </ion-button>
   </div>

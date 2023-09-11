@@ -31,11 +31,13 @@
       please contact your client advisor directly.</ion-text
     >
     <br />
-    <ion-text color="primary">Contact Client Advisor</ion-text>
+    <ion-text color="primary" (click)="clientAdvisor()"
+      >Contact Client Advisor</ion-text
+    >
     <ion-button
       color="light"
       expand="block"
-      (click)="clickAnything()"
+      (click)="closeButton()"
       [routerLink]="['/health-check']"
     >
       Close

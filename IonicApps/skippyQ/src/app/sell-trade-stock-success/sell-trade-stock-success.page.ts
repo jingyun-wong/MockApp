@@ -39,7 +39,7 @@ export class SellTradeStockSuccessPage implements OnInit {
   viewInitTime!: number
   dbloadTime!: number
   backEndErrors = 0;
-  pageName: string = "buyTradeStockDetails";
+  pageName: string = "sellTradeStockDetails";
 
   frontEndErrors = parseInt(localStorage.getItem('frontEndErrors'))
 

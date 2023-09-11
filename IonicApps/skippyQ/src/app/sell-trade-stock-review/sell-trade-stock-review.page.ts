@@ -39,7 +39,7 @@ export class SellTradeStockReviewPage implements OnInit {
   viewInitTime!: number
   dbloadTime!: number
   backEndErrors = 0;
-  pageName: string = "buyTradeStockReview";
+  pageName: string = "sellTradeStockReview";
 
   constructor(public route: ActivatedRoute, public router: Router, private trackingService: TrackingService) {
     this.startTime = window.performance.now()
