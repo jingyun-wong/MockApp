@@ -56,6 +56,24 @@ export class CampaignDonorsPage implements OnInit {
     this.trackingService.trackCTAMetrics(this.pageName, "button", "go to My Manage Porfolio", "ubsManage-myManage", 0);
   }
 
+  totalNetAssets(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to Total Net Assets", "null", 0);
+  }
+
+  myTradingPortfolio(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to My Trading Portfolio", "myAdvice", 0);
+  }
+
+  lombardLoans(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "go to Lombard Loans", "null", 0);
+  }
+
   async presentAlert() {
       // const alert = await this.alertController.create({
       //   header: '',

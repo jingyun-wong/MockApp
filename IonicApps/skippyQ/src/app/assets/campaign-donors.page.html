@@ -13,8 +13,7 @@
       <h4>Portfolios</h4>
     </ion-text>
   </ion-item-divider>
-  <ion-card class="welcome-card" [routerLink]="['/view-details']">
-    <!-- <img src="/assets/WebLogo.PNG" alt=""/> -->
+  <ion-card class="welcome-card" (click)="totalNetAssets()" [routerLink]="['/view-details']">
     <ion-card-header>
       <ion-card-subtitle>Total net assets</ion-card-subtitle>
       <ion-card-title>CHF 3'452060</ion-card-title>
@@ -44,7 +43,7 @@
       <p>UBS Advice [Switzerland] Growth</p>
     </ion-card-content>
   </ion-card>
-  <ion-card class="welcome-card" [routerLink]="['/my-advice']">
+  <ion-card class="welcome-card" (click)="myTradingPortfolio()" [routerLink]="['/my-advice']">
     <ion-card-header>
       <ion-card-subtitle>My Trading Portfolio</ion-card-subtitle>
       <ion-card-title>EUR 52'010.50</ion-card-title>
@@ -68,7 +67,7 @@
       <h4>Further Assets</h4>
     </ion-text>
   </ion-item-divider>
-  <ion-card class="welcome-card" [routerLink]="['/my-advice']">
+  <ion-card class="welcome-card"  (click)="lombardLoans()">
     <ion-card-header>
       <ion-card-subtitle>Lombard loans</ion-card-subtitle>
       <ion-card-title>CHF -3200000</ion-card-title>

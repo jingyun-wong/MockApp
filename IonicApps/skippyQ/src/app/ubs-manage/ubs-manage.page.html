@@ -19,28 +19,28 @@
 </ion-card>
 
 <ion-content>
+
 <ion-text class="ion-padding">Comments from portfolio manager</ion-text>
 <ion-text *ngIf="type == 'manage'" class="ion-padding" color="danger">Show All</ion-text>
 <ion-card *ngIf="type == 'manage'">
   <ion-list>
-    <ion-item *ngFor="let editorial of editorials" (click)="routeEditorials()">
+    <ion-item *ngFor="let editorial of editorials" (click)="routeEditorials()">   
       <ion-col>
-      <ion-card-subtitle>Editorial</ion-card-subtitle>
-      <br>
-      <ion-card-title>{{editorial.name}}</ion-card-title>
-      <br>
-      <ion-card-subtitle>{{editorial.contentType}}</ion-card-subtitle>
-      <br>
-      <ion-card-subtitle>{{editorial.textType}}</ion-card-subtitle>
-
+        <ion-card-subtitle>Editorial</ion-card-subtitle>
+        <br>
+        <ion-card-title>{{editorial.name}}</ion-card-title>
+        <br>
+        <ion-card-subtitle>{{editorial.contentType}}</ion-card-subtitle>
+        <br>
+        <ion-card-subtitle>{{editorial.textType}}</ion-card-subtitle>
       </ion-col>
       <ion-col>
         <img alt="oil" src={{editorial.image}} >
       </ion-col>
-
     </ion-item>
   </ion-list>
 </ion-card>
+
 <ion-card *ngIf="type == 'way'">
   <div style="margin:20px">
     <h6>Today</h6>
@@ -56,7 +56,7 @@
 <ion-text *ngIf="type == 'way'" class="ion-padding">Updates</ion-text>
 <ion-card *ngIf="type == 'way'">
   <ion-list>
-    <ion-item>
+    <ion-item (click)="clickOnUpdates('Report')">
       <ion-col>
       <ion-card-subtitle>Performance Report</ion-card-subtitle>
       <br>
@@ -71,7 +71,7 @@
         <img alt="oil" src="https://images.unsplash.com/photo-1429041966141-44d228a42775?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" >
       </ion-col>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="clickOnUpdates('Journal')">
       <ion-col>
         <ion-card-subtitle>Journal</ion-card-subtitle>
         <br>
@@ -85,7 +85,7 @@
         <img alt="oil" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2026&q=80" >
       </ion-col>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="clickOnUpdates('Video')">
       <ion-col>
         <ion-card-subtitle>Video</ion-card-subtitle>
         <br>
