@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TrackingService } from './../shared/services/tracking.service';
 
 @Component({
   selector: 'app-no-issue',
@@ -7,24 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoIssuePage implements OnInit {
 
-  clicks = parseInt(localStorage.getItem("pageClicks"));
-  startTime!: number;
-  initTime!: number;
-  contentInitTime!: number;
-  viewInitTime!: number;
+  clicks = 0
 
-  constructor() { }
+  startTime!: number
+  initTime!: number
+  dbStartTime!: number
+  contentInitTime!: number
+  viewInitTime!: number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "noIssue";
 
-  ngOnInit() {
+  constructor(private trackingService: TrackingService,) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
-    this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
   }
 
-  clickAnything() {
+  ngOnInit() {
+    this.initTime = window.performance.now()
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
+  }
+
+  backButton() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on back button", "healthCheck", 0);
   }
 
 }

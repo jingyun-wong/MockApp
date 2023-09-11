@@ -9,7 +9,7 @@
     <ion-toolbar>
       <ion-buttons
         slot="start"
-        (click)="clickAnything()"
+        (click)="backButton()"
         [routerLink]="['/health-check']"
       >
         <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
@@ -58,7 +58,7 @@
     <ion-button
       expand="block"
       color="dark"
-      (click)="clickAnything()"
+      (click)="backButton()"
       [routerLink]="['/health-check']"
       >Back to overview</ion-button
     ><br />

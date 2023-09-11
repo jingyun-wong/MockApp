@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons
       slot="start"
-      (click)="clickAnything()"
+      (click)="backButton()"
       [routerLink]="['/health-check']"
     >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
@@ -57,7 +57,7 @@
     expand="block"
     color="dark"
     *ngIf="issue === 'Georg Fischer N'"
-    (click)="clickAnything()"
+    (click)="requestProposal()"
     [routerLink]="['/request-proposal']"
     >Request proposal</ion-button
   ><br />
@@ -65,9 +65,9 @@
     expand="block"
     color="dark"
     *ngIf="issue === 'Peugeot SA'"
-    (click)="clickAnything()"
+    (click)="improveQuality()"
     [routerLink]="['/improve-quality']"
     >Improve Quality</ion-button
   ><br />
-  <ion-button expand="block" color="light">Contact client advisor</ion-button>
+  <ion-button expand="block" color="light" (click)="clientAdvisor()">Contact client advisor</ion-button>
 </ion-content>

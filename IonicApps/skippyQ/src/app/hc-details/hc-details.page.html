@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" (click)="goToSelectedIssuePage()">
+    <ion-buttons slot="start" (click)="backButton()">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title>Health Check</ion-title>
@@ -47,7 +47,7 @@
     advisor.
   </ion-text>
   <ion-text color="primary"> >Contact client advisor </ion-text>
-  <ion-button expand="block" color="dark" (click)="goToSelectedIssuePage()"
+  <ion-button expand="block" color="dark" (click)="backButton()"
     >Back</ion-button
   ><br />
 </ion-content>

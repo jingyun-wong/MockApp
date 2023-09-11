@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Campaign } from '../shared/models/campaign';
 import { TrackingService } from '../shared/services/tracking.service';
 
 
@@ -10,22 +9,21 @@ import { TrackingService } from '../shared/services/tracking.service';
 })
 export class ListPage implements OnInit {
 
-  allCampaigns: Campaign[];
-  campaigns: Campaign[];
-  campaignEmail: string;
+  clicks = 0
 
-  clicks = parseInt(localStorage.getItem("pageClicks"));
-  startTime!: number;
-  initTime!: number;
-  contentInitTime!: number;
-  viewInitTime!: number;
-  pageName: string = "position"
+  startTime! : number
+  initTime! : number
+  dbStartTime! : number
+  contentInitTime! : number
+  viewInitTime! : number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "myAdvice";
 
   constructor(public trackingService: TrackingService) {
     this.startTime = window.performance.now()
     localStorage.setItem("startTime", JSON.stringify(this.startTime))
     localStorage.setItem("dbLoadTime", JSON.stringify(0))
-
   }
 
   ngOnInit() {
@@ -36,7 +34,7 @@ export class ListPage implements OnInit {
   clickHome() {
     this.clicks += 1
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-    this.trackingService.trackCTAMetrics(this.pageName, "button", "back to home", "home", 0);
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on back button", "home", 0);
   }
 
   clickHC() {

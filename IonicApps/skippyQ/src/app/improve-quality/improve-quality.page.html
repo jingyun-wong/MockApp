@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons
       slot="start"
-      (click)="clickAnything()"
+      (click)="backButton()"
       [routerLink]="['/selected-issue', 'Peugeot SA']"
     >
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
@@ -63,9 +63,11 @@
   <ion-button
     expand="block"
     color="dark"
-    (click)="clickAnything()"
+    (click)="nextButton()"
     [routerLink]="['/improve-quality-review']"
     >Next</ion-button
   ><br />
-  <ion-button expand="block" color="light">Contact client advisor</ion-button>
+  <ion-button expand="block" color="light" (click)="clientAdvisor()"
+    >Contact client advisor</ion-button
+  >
 </ion-content>

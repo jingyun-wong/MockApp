@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TrackingService } from './../shared/services/tracking.service';
 
 @Component({
   selector: 'app-hc-details',
@@ -19,28 +20,36 @@ export class HcDetailsPage implements OnInit {
   doughnutChart: any;
   lineChart: any;
 
-  clicks = parseInt(localStorage.getItem("pageClicks"));
-  startTime!: number;
-  initTime!: number;
-  contentInitTime!: number;
-  viewInitTime!: number;
+  clicks = 0
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  startTime!: number
+  initTime!: number
+  dbStartTime!: number
+  contentInitTime!: number
+  viewInitTime!: number
+  dbloadTime!: number
+  backEndErrors = 0;
+  pageName: string = "hcDetails";
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private trackingService: TrackingService,) {
+    this.startTime = window.performance.now()
+    localStorage.setItem("startTime", JSON.stringify(this.startTime))
+  }
 
   ngOnInit() {
     this.issue = this.activatedRoute.snapshot.paramMap.get('issue');
-    this.startTime = window.performance.now()
-    localStorage.setItem("startTime", JSON.stringify(this.startTime))
     this.initTime = window.performance.now()
-    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime) / 1000))
+    localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime - this.startTime)))
   }
 
   ngAfterViewInit() {
     this.lineChartMethod();
   }
 
-  goToSelectedIssuePage() {
-    this.clickAnything()
+  backButton() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on back button", "selectedIssue", 0);
     this.router.navigate(['/selected-issue', this.issue]);
   }
 
@@ -76,8 +85,4 @@ export class HcDetailsPage implements OnInit {
     });
   }
 
-  clickAnything() {
-    this.clicks += 1
-    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
-  }
 }
