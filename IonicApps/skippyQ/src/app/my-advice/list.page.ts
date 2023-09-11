@@ -48,4 +48,22 @@ export class ListPage implements OnInit {
     localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click to positions", "position", 0);
   }
+
+  clickInvestmentIdeas() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to investment ideas", "null", 0);
+  }
+
+  clickOnPerformance() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to performance", "null", 0);
+  }
+
+  clickOnTransaction() {
+    this.clicks += 1
+    localStorage.setItem("pageClicks", JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click to transaction", "null", 0);
+  }
 }
