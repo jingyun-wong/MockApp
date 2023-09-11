@@ -60,6 +60,8 @@ export class InvestmentDetailsOilPage implements OnInit {
             }
           }
 
+          localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now()))
+
           if (localStorage.getItem("userStoryID") == "5"){
             alert('You have completed this user story!');  
             this.trackingService.trackJourneyMetrics(window.performance.now());
@@ -87,6 +89,7 @@ export class InvestmentDetailsOilPage implements OnInit {
         localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
         console.log(error)
       })
+
     }); 
   }
 

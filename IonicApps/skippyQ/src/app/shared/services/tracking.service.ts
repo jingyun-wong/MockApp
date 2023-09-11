@@ -62,6 +62,11 @@ export class TrackingService {
         domainName = "home"
       }
 
+      else if (url == "/assets"){
+        pageName = "assets",
+        domainName = "home"
+      }
+
       // view Trades task - eTrading
       else if (url == "/trading-home"){
         pageName = "tradingHome"
@@ -276,6 +281,7 @@ export class TrackingService {
   trackJourneyMetrics(finalTiming){
     console.log("END OF USER STORY")
     console.log("JOURNEY METRICS");
+    console.log(localStorage.getItem("journeyElapsedTime"))
     var pageCount = parseInt(localStorage.getItem("pageCount"))
 
     var jsonbody = {
