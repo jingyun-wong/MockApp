@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Chart from 'chart.js/auto';
+import { TrackingService } from '../shared/services/tracking.service';
 
 @Component({
   selector: 'app-trading-eg',
@@ -18,10 +19,20 @@ export class TradingEgPage implements AfterViewInit {
     doughnutChart: any;
     lineChart: any;
     name: string;
+    startTime! : number;
+    initTime! : number;  
+    pageName: string = 'tradingEg'
+    clicks: number = 0;
   
-    constructor(private activatedRoute: ActivatedRoute) { }
+    constructor(private activatedRoute: ActivatedRoute, public trackingService: TrackingService, public router: Router) { 
+      this.startTime = window.performance.now()
+      localStorage.setItem("startTime", JSON.stringify(this.startTime))  
+    }
   
     ngOnInit() {
+      this.initTime = window.performance.now()
+      localStorage.setItem("pageLoadTime", JSON.stringify((this.initTime-this.startTime)))
+  
       this.activatedRoute.queryParams.subscribe(params => {
         console.log(params)
         this.name = params["name"];
@@ -30,9 +41,8 @@ export class TradingEgPage implements AfterViewInit {
   
     ngAfterViewInit() {
       this.lineChartMethod();
+      localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now() - this.initTime))
     }
-  
-   
   
     lineChartMethod() {
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
@@ -64,5 +74,11 @@ export class TradingEgPage implements AfterViewInit {
           ]
         }
       });
+    }
+
+    backButton(){
+      this.clicks +=1 
+      localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+      this.trackingService.trackCTAMetrics(this.pageName, "button",  `back to investment trading ideas`, "investmentTradingIdea", 0);  
     }
 }

@@ -6,6 +6,7 @@
     <ion-title>Trading Idea</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-card class="welcome-card">
     <ion-item>
@@ -17,16 +18,13 @@
       <ion-card-subtitle>{{tradingIdeaType}}</ion-card-subtitle>
       </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col>
         <ion-card-title>{{tradingIdeaName}}</ion-card-title>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
-        <ion-col>
-          <ion-card-title color="medium">Bayerische Motoren Werke AG</ion-card-title>
-        </ion-col>
-      </ion-row> -->
+
       <ion-row>
         <ion-col>
           <ion-card-title color="secondary">ISN: DE0005190003 DE0005190037 </ion-card-title>
@@ -63,13 +61,9 @@
           </ion-col>
         </ion-row>
 
-
-
         <ion-row>
           <ion-col>
-
             <ion-card-subtitle><ion-icon name="close-circle-outline" ></ion-icon>As of 8 Feb 2023</ion-card-subtitle>
-
           </ion-col>
         </ion-row>
       </ion-card-content>
@@ -77,52 +71,41 @@
 
     <ion-item >
       <ion-card-content>
-
         <ion-row >
           <ion-col>
-
             <ion-card-title>Why Invest?</ion-card-title>
-
           </ion-col>
         </ion-row>
-
         <ion-row>
           <ion-col>
             <p>
               {{tradingIdeaName}} shares have been advancing last several weeks, and the company continues to focus on speeding up electric vehicle adoption. With a market capitalization of €55 billion, the shares of {{tradingIdeaName}} are not expensive, but investors should keep in mind that the global economy faces a recession risk that could dent corporate earnings and stock markets.
-
             </p>
           </ion-col>
         </ion-row>
-
-
       </ion-card-content>
-
     </ion-item>
   </ion-card>
 
   <ion-card class="welcome-card">
     <ion-card-header>
     <ion-row>
-
       <ion-col>
         <ion-card-title>Disclaimer</ion-card-title>
       </ion-col>
-
     </ion-row>
     </ion-card-header>
-
   </ion-card>
 
   <ion-row>
   <ion-col>
-  <ion-button expand="block" color="secondary" [routerLink]="['/buy-trade']" (click) ="buyTradeRoute()">Buy</ion-button>
+  <ion-button expand="block" color="secondary" [routerLink]="['/buy-trade']" (click)="buyTradeRoute()">Buy</ion-button>
   </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col>
-      <ion-button expand="block" color="medium" [routerLink]="['/trading-eg']" [queryParams]="{name:tradingIdeaName}" (clicl)="tradingRouteEg()">More Details</ion-button>
+      <ion-button expand="block" color="medium" [routerLink]="['/trading-eg']" [queryParams]="{name:tradingIdeaName}" (click)="tradingRouteEg()">More Details</ion-button>
     </ion-col>
   </ion-row>
 

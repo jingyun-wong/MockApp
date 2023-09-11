@@ -59,14 +59,12 @@ export class InvestmentIdeasPage implements OnInit {
         this.mostRead.push(this.allInvestment[topic][random])
       }
 
-      localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now()))
+      localStorage.setItem("dbLoadTime",JSON.stringify(window.performance.now() - this.initTime))  
     }, error => {
       this.backEndErrors += 1
       localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
       console.log(error)
     })
-
-    localStorage.setItem("dbLoadTime",JSON.stringify(parseFloat(localStorage.getItem("dbLoadTime")) - this.initTime))
   }
 
   investmentDetails(){

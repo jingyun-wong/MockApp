@@ -64,7 +64,7 @@ constructor(private http: HttpClient) {
     // post Journey trackingMetrcis
     postJourneyTrackingMetrics(jsonbody){
         return this.http.post('http://localhost:2345/add/journeytrackingMetrics',jsonbody).subscribe(
-            data => console.log('Success',data), 
+            data => console.log('JOURNEY Success',data), 
             error => console.log('Error',error))
     }
 
