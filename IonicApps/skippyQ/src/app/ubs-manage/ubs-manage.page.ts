@@ -58,13 +58,14 @@ pageName: string = "ubsManage"
         localStorage.clear();
         location.reload();
         this.router.navigate(['/user-stories'])}
-      ,500)
+      ,700)
     }
   }
 
   async openPDF(){
     this.clicks +=1
-    localStorage.setItem("totalClicks",JSON.stringify(parseInt(localStorage.getItem("totalClicks")) +  1))
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    localStorage.setItem("totalClicks",JSON.stringify(parseInt(localStorage.getItem("totalClicks")) + this.clicks ))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "click to download report", "null", 0);
 
     const modal = await this.modalController.create({
@@ -95,6 +96,12 @@ pageName: string = "ubsManage"
     this.clicks +=1
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "back to home", "home", 0);
+  }
+
+  clickOnUpdates(type){
+    this.clicks +=1
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", `click on article - ${type}`, "null", 0);
   }
 
 }
