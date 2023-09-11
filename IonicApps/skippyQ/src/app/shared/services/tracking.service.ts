@@ -19,14 +19,11 @@ export class TrackingService {
 
   private cache: { [id: number]: { description: string, time: number } } = {};
 
-
   urlConvert(currentUrl) {
     if (currentUrl.includes(';')) {
       return String(currentUrl.split(';')[0])
     }
-
     return currentUrl
-
   }
 
   constructor(private router: Router, private SqlService: SqlService) {
@@ -149,7 +146,7 @@ export class TrackingService {
         pageName = "investmentDetails"
         domainName = "Direct Investment Insights (DII)"
       }
-      else if (url == "/investment-trading-idea") {
+      else if (url == url.match(/investment-trading-idea*/)) {
         pageName = "investmentTradingIdea"
         domainName = "Direct Investment Insights (DII)"
       }

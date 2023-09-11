@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" [routerLink]="['/investment-trading-idea']" [queryParams]="{name: name}">
+    <ion-buttons slot="start" (click)="backButton()" [routerLink]="['/investment-trading-idea']" [queryParams]="{name: name}">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="start">

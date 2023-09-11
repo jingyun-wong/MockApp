@@ -35,7 +35,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-col>
       <ion-textarea background-color="warning" placeholder="You have no trading rights. Please contact your client advisor in order to proceed"></ion-textarea>
-      <ion-button  style="text-align:center" color="warning">
+      <ion-button  style="text-align:center" color="warning" (click)="contactClientAdvisor()">
         Contact Client Advisor
       </ion-button>
       </ion-col>
@@ -73,7 +73,7 @@
               </ion-col>
             </ion-row>
 
-            <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdea.name, type: tradingIdea.type}" (click)="tradingIdeaRoute()">Why to Invest?</ion-button>
+            <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdea.name, type: tradingIdea.type}" (click)="tradingIdeaRoute(tradingIdea.name)">Why to Invest?</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -124,7 +124,7 @@
             </ion-col>
           </ion-row>
 
-          <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[0].name, type: tradingIdeaList[0].type}" (click)="tradingIdeaRoute()">Why to Invest?</ion-button>
+          <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[0].name, type: tradingIdeaList[0].type}" (click)="tradingIdeaRoute(tradingIdeaList[0].name)">Why to Invest?</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -165,7 +165,7 @@
           </ion-col>
         </ion-row>
 
-        <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[1].name, type: tradingIdeaList[1].type}" (click)="tradingIdeaRoute()">Why to Invest?</ion-button>
+        <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[1].name, type: tradingIdeaList[1].type}" (click)="tradingIdeaRoute(tradingIdeaList[1].name)">Why to Invest?</ion-button>
       </ion-card-content>
 
     </ion-card>
@@ -202,7 +202,7 @@
           </ion-col>
         </ion-row>
 
-        <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[2].name, type: tradingIdeaList[2].type}" (click)="tradingIdeaRoute()">Why to Invest?</ion-button>
+        <ion-button [routerLink]="['/investment-trading-idea']" [queryParams]="{name: tradingIdeaList[2].name, type: tradingIdeaList[2].type}" (click)="tradingIdeaRoute(tradingIdeaList[2].name)">Why to Invest?</ion-button>
       </ion-card-content>
     </ion-card>
       </ion-col>
@@ -220,22 +220,20 @@
         </ion-row>
         <ion-row>
           <ion-col>
-          <ion-button color="light" size="small" [routerLink]="['/finance-news']" (click)="financeNewRoute()">Finance</ion-button>
-          <ion-button color="light" size="small">China</ion-button>
-          <ion-button color="light" size="small">United States</ion-button>
-          <ion-button color="light" size="small">APAC</ion-button>
-          <ion-button color="light" size="small">Equities</ion-button>
-          <ion-button color="light" size="small">Agricultural Yield</ion-button>
-          <ion-button color="light" size="small">US Dollar (USD)</ion-button>
-          <ion-button color="light" size="small">Chinese Yuan RenMinBi (CNY)</ion-button>
+          <ion-button color="light" size="small" [routerLink]="['/finance-news']" (click)="financeNewRoute('finance')">Finance</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('china')">China</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('united states')">United States</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('apac')">APAC</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('equities')">Equities</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('agricultural yield')">Agricultural Yield</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('us dollar')">US Dollar (USD)</ion-button>
+          <ion-button color="light" size="small" (click)="financeNewRoute('yuan')">Chinese Yuan RenMinBi (CNY)</ion-button>
           </ion-col>
         </ion-row>
 
       </ion-card>
 
-
-
-      <ion-button color="dark" expand="block">See trading ideas</ion-button>
+      <ion-button color="dark" expand="block" (click)="seeTradingIdeas()">See trading ideas</ion-button>
 
     </ion-col>
 

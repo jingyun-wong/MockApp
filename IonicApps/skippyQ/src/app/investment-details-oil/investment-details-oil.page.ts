@@ -60,7 +60,7 @@ export class InvestmentDetailsOilPage implements OnInit {
             }
           }
 
-          localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now()))
+          localStorage.setItem("dbLoadTime", JSON.stringify(window.performance.now() - this.initTime))
 
           if (localStorage.getItem("userStoryID") == "5"){
             alert('You have completed this user story!');  
@@ -89,24 +89,33 @@ export class InvestmentDetailsOilPage implements OnInit {
         localStorage.setItem("backEndErrors", JSON.stringify(this.backEndErrors))
         console.log(error)
       })
-
     }); 
   }
 
-  financeNewRoute(){
+  financeNewRoute(name){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
-    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII finance tags", "financeNews", 0);
+    this.trackingService.trackCTAMetrics(this.pageName, "button",  `click on an DII ${name} tags`, "financeNews", 0);
   }
-  tradingIdeaRoute(){
+  tradingIdeaRoute(name){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
-    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on an DII trading ideas", "investmentTradingIdea", 0);
+    this.trackingService.trackCTAMetrics(this.pageName, "button", `click on an DII trading ideas - ${name}`, "investmentTradingIdea", 0);
   }
   backRoute(){
     this.clicks +=1 
     localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
     this.trackingService.trackCTAMetrics(this.pageName, "button", "back to DII investment Ideas page", "investmentIdeas", 0);
+  }
+  contactClientAdvisor(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on contact client advisor", "null", 0);
+  }
+  seeTradingIdeas(){
+    this.clicks +=1 
+    localStorage.setItem("pageClicks",JSON.stringify(this.clicks))
+    this.trackingService.trackCTAMetrics(this.pageName, "button", "click on see trading ideas", "null", 0);
   }
 }
 

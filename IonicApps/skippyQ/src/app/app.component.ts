@@ -67,8 +67,27 @@ export class AppComponent {
 
   endStory() {
     alert('You have chose to end this user story testing');
+    var pageCount = parseInt(localStorage.getItem("pageCount"))
+
+    var jsonbody = {
+      "sessionId": JSON.parse(localStorage.getItem("sessionId")),
+      "userStoryId": JSON.parse(localStorage.getItem("userStoryID")),
+      "totalClicks": JSON.parse(localStorage.getItem("totalClicks")),
+      "elapsedTime": ((window.performance.now() - parseFloat(localStorage.getItem("journeyElapsedTime")))/1000).toFixed(5),
+      "totalLoadTime": (parseFloat(localStorage.getItem("totalLoadTime"))/1000).toFixed(5),
+      "totalDBLoadTime": (parseFloat(localStorage.getItem("totalDBLoadTime"))/1000).toFixed(5),
+      "totalPageVisits": pageCount,
+      "insertTimestamp": Date.now(),
+      "frontendErrors": JSON.parse(localStorage.getItem("frontendErrors")),
+      "backendErrors": JSON.parse(localStorage.getItem("backendErrors")),
+      "completedJourney": 1
+    }
+
+    console.log(jsonbody)
+
+    this.SqlService.postJourneyTrackingMetrics(jsonbody);
+
     localStorage.clear()
-    location.reload();
     this.router.navigate(['/user-stories'])
   }
 

@@ -394,6 +394,7 @@ app.post('/add/journeytrackingMetrics', function (req, res) {
     var insertTimestamp = new Date().toISOString().split('.')[0]
     var frontendErrors = 0
     var backendErrors = 0
+    var completedJourney = req.body.completedJourney == '1' ? 1 : 0
 
     // connect to your database
     sql.connect(config, function (err) {
@@ -405,7 +406,7 @@ app.post('/add/journeytrackingMetrics', function (req, res) {
 
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[overallJourneyMetrics]
-        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}')`, function (err, results, fields) {
+        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}', '${completedJourney}')`, function (err, results, fields) {
             if (err) res.send(err)
 
             // send records as a response
@@ -522,7 +523,7 @@ app.post('/add/ctrTrackingMetrics', function (req, res) {
         var request = new sql.Request();
 
         // query to the database and get the records
-        request.query(`INSERT INTO [dbo].[ctrMetrics1]
+        request.query(`INSERT INTO [dbo].[ctrMetrics]
         (sessionID, pageName, ctaType, ctaName, ctaDestination, ctaTimeTaken, insertTimestamp)
         VALUES('${sessionId}','${pageName}','${ctaType}','${ctaName}','${ctaDestination}','${ctaTimeTaken}', '${insertTimestamp}')`, 
         function (err, results, fields) {
