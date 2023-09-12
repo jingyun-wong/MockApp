@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform, MenuController } from '@ionic/angular';
 
-import { Router } from '@angular/router';
+import { Router , NavigationEnd} from '@angular/router';
 
 import { filter } from 'rxjs/operators';
 
@@ -28,6 +28,8 @@ export class AppComponent {
   timedOut = false;
   abandoned = [];
   pageName: string = "tabs"
+
+  enabled = false
 
   public adminPages = [
     {
@@ -58,6 +60,16 @@ export class AppComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (localStorage.getItem("userStoryID") !== null) {
+          this.enabled = true
+        }
+      }
+    });
+  }
+
   initializeApp() {
     this.platform.ready().then(async () => {
       this.router.navigate(['/user-stories'])
@@ -73,9 +85,9 @@ export class AppComponent {
       "sessionId": JSON.parse(localStorage.getItem("sessionId")),
       "userStoryId": JSON.parse(localStorage.getItem("userStoryID")),
       "totalClicks": JSON.parse(localStorage.getItem("totalClicks")),
-      "elapsedTime": ((window.performance.now() - parseFloat(localStorage.getItem("journeyElapsedTime")))/1000).toFixed(5),
-      "totalLoadTime": (parseFloat(localStorage.getItem("totalLoadTime"))/1000).toFixed(5),
-      "totalDBLoadTime": (parseFloat(localStorage.getItem("totalDBLoadTime"))/1000).toFixed(5),
+      "elapsedTime": ((window.performance.now() - parseFloat(localStorage.getItem("journeyElapsedTime"))) / 1000).toFixed(5),
+      "totalLoadTime": (parseFloat(localStorage.getItem("totalLoadTime")) / 1000).toFixed(5),
+      "totalDBLoadTime": (parseFloat(localStorage.getItem("totalDBLoadTime")) / 1000).toFixed(5),
       "totalPageVisits": pageCount,
       "insertTimestamp": Date.now(),
       "frontendErrors": JSON.parse(localStorage.getItem("frontendErrors")),
