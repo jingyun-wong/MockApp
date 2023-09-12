@@ -51,7 +51,7 @@ export class InvestmentTradingIdeaPage implements OnInit {
       alert('You have completed this user story!');  
       this.trackingService.trackJourneyMetrics(window.performance.now());
       localStorage.clear();
-      // location.reload();
+      location.reload();
       this.router.navigate(['/user-stories'])
     }
   }

@@ -34,6 +34,7 @@ export class FinanceNewsPage implements OnInit {
       setTimeout(() => {
         alert("You have completed the user story!") ;   
         localStorage.clear();
+        location.reload();
         this.router.navigate(['/user-stories'])}
       ,500)
     }

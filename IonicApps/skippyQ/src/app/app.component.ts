@@ -88,6 +88,7 @@ export class AppComponent {
     this.SqlService.postJourneyTrackingMetrics(jsonbody);
 
     localStorage.clear()
+    location.reload();
     this.router.navigate(['/user-stories'])
   }
 

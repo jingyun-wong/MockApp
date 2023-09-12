@@ -66,6 +66,7 @@ export class InvestmentDetailsOilPage implements OnInit {
             alert('You have completed this user story!');  
             this.trackingService.trackJourneyMetrics(window.performance.now());
             localStorage.clear();
+            location.reload();
             this.router.navigate(['/user-stories'])
           }
       
