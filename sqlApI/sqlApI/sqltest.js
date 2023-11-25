@@ -395,6 +395,7 @@ app.post('/add/journeytrackingMetrics', function (req, res) {
     var frontendErrors = 0
     var backendErrors = 0
     var completedJourney = req.body.completedJourney == '1' ? 1 : 0
+    var humanError = 0
 
     // connect to your database
     sql.connect(config, function (err) {
@@ -406,7 +407,7 @@ app.post('/add/journeytrackingMetrics', function (req, res) {
 
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[overallJourneyMetrics]
-        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}', '${completedJourney}')`, function (err, results, fields) {
+        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}', '${completedJourney}', '${humanError}')`, function (err, results, fields) {
             if (err) res.send(err)
 
             // send records as a response
@@ -435,6 +436,8 @@ app.post('/add/pagetrackingMetrics', function (req, res) {
     var insertTimestamp = new Date().toISOString().split('.')[0]
     var frontendErrors = 0
     var backendErrors = 0
+    var completedJourney = req.body.completedJourney == '1' ? 1 : 0
+    var humanError = 0
 
     // connect to your database
     sql.connect(config, function (err) {
@@ -446,7 +449,7 @@ app.post('/add/pagetrackingMetrics', function (req, res) {
 
         // query to the database and get the records
         request.query(`INSERT INTO [dbo].[overallJourneyMetrics]
-        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}')`, function (err, results, fields) {
+        VALUES('${sessionId}',${userStoryId},${totalClicks},'${elapsedTime}','${totalLoadTime}','${totalDBLoadTime}','${totalPageVisits}','${insertTimestamp}','${frontendErrors}','${backendErrors}', '${completedJourney}', '${humanError}')`, function (err, results, fields) {
             if (err) res.send(err)
 
             // send records as a response
